@@ -4,8 +4,7 @@ import java.util.stream.Collectors;
 public class MainStream {
     public static void main(String[] args) {
         if (args.length > 0) {
-            int countPositiveNumbers = 0;
-            countPositiveNumbers = Arrays.stream(args)
+            int countPositiveNumbers = Arrays.stream(args)
                     .map(argument -> {
                         try {
                             return Integer.valueOf(argument);
