@@ -4,7 +4,7 @@ import java.util.Objects;
 public class MainStream {
     public static void main(String[] args) {
         if (args.length > 0) {
-            int countPositiveNumbers = (int) Arrays.stream(args)
+            long countPositiveNumbers = Arrays.stream(args)
                     .map(MainStream::convertToInteger)
                     .filter(Objects::nonNull)
                     .filter(number -> number > 0)

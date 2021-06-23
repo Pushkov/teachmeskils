@@ -3,8 +3,9 @@ public class Homework4 {
         int[] array = ConsoleReader.readArrayOfInteger();
         if (array != null) {
             System.out.println("Max number in array: " + max(array));
-        } else
+        } else {
             System.out.println("Array is empty");
+        }
     }
 
     /**

@@ -1,10 +1,11 @@
 public class Homework3 {
     public static void main(String[] args) {
         int[] array = ConsoleReader.readArrayOfInteger();
-        if (array != null)
+        if (array != null) {
             System.out.println("Average value of array: " + average(array));
-        else
+        } else {
             System.out.println("Array is empty");
+        }
     }
 
     /**
