@@ -1,25 +1,27 @@
 import java.util.Arrays;
-import java.util.stream.Collectors;
+import java.util.Objects;
 
 public class MainStream {
     public static void main(String[] args) {
         if (args.length > 0) {
-            int countPositiveNumbers = Arrays.stream(args)
-                    .map(argument -> {
-                        try {
-                            return Integer.valueOf(argument);
-                        } catch (NumberFormatException e) {
-                            System.out.println("Argument: " + argument + " - is not integer number");
-                            return -1;  //Не знаю насколько корректно этот метод обработки исключения
-                        }
-                    })
-                    .filter(number -> number >= 0)
-                    .collect(Collectors.toList())
-                    .size();
+            int countPositiveNumbers = (int) Arrays.stream(args)
+                    .map(MainStream::convertToInteger)
+                    .filter(Objects::nonNull)
+                    .filter(number -> number > 0)
+                    .count();
             System.out.println("Count of arguments: " + args.length);
             System.out.println("Count of positive numbers: " + countPositiveNumbers);
         } else {
             System.out.println("Arguments not found.");
         }
+    }
+
+    private static Integer convertToInteger(String stringValue) {
+        try {
+            return Integer.valueOf(stringValue);
+        } catch (NumberFormatException e) {
+            System.out.println("Argument: " + stringValue + " - is not integer number");
+        }
+        return null;
     }
 }

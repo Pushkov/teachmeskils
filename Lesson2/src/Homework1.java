@@ -11,6 +11,6 @@ public class Homework1 {
      **/
     public static int sum(int a, int b) {
         long result = (long) a + (long) b;
-        return (int) ((result > Integer.MAX_VALUE) ? -1 : result);
+        return (int) (result > Integer.MAX_VALUE ? -1 : result);
     }
 }

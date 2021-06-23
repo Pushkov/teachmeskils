@@ -4,8 +4,8 @@ public class Main {
             int countPositiveNumbers = 0;
             for (String arg : args) {
                 try {
-                    int currentArg = Integer.valueOf(arg);
-                    if (currentArg >= 0) {
+                    int currentArg = Integer.parseInt(arg);
+                    if (currentArg > 0) {
                         countPositiveNumbers++;
                         System.out.println("Argument: " + arg + " - is positive number");
                     } else {

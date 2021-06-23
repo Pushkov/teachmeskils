@@ -1,7 +1,10 @@
 public class Homework4 {
     public static void main(String[] args) {
         int[] array = ConsoleReader.readArrayOfInteger();
-        System.out.println("Max number in array: " + max(array));
+        if (array != null) {
+            System.out.println("Max number in array: " + max(array));
+        } else
+            System.out.println("Array is empty");
     }
 
     /**
