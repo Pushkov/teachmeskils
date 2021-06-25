@@ -3,33 +3,40 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
-import java.util.stream.Collectors;
 
 public class HomeWork {
 
     public static void main(String[] args) {
-//        printArray(); //
-/*
+
+        System.out.println("*** TASK: fill array random values and printing;");
+        printArray();
+        System.out.println();
+        System.out.println("*** TASK: operation;");
         System.out.println(operation(1));
         System.out.println(operation(0));
         System.out.println(operation(-1));
-*/
-//        System.out.println(calculateCountOfOddElementsInMatrix(new int[]{1, 2, 3, 4, 5, 6}));
-//        calculateSumOfDiagonalElements();
-/*
+        System.out.println();
+        System.out.println("*** TASK: count of odd elements in array;");
+        System.out.println(calculateCountOfOddElementsInMatrix(new int[]{1, 2, 3, 4, 5, 6}));
+        System.out.println();
+        System.out.println("*** TASK: sum of diagonal elements;");
+        calculateSumOfDiagonalElements();
+        System.out.println();
+        System.out.println("*** TASK: count developers;");
         countDevs(11);
         countDevs(31);
         countDevs(42);
         countDevs(104);
         countDevs(105);
-        countDevs(106);
+        countDevs(16);
         countDevs(107);
-        countDevs(108);
+        countDevs(101);
         countDevs(109);
         countDevs(100);
-*/
-
-/*
+        countDevs(1);
+        countDevs(2);
+        System.out.println();
+        System.out.println("*** TASK: division by 3 and 5;");
         foobar(1);
         foobar(3);
         foobar(4);
@@ -37,9 +44,12 @@ public class HomeWork {
         foobar(10);
         foobar(11);
         foobar(15);
-*/
-//        printMatrix();
-//        printPrimeNumbers();
+        System.out.println();
+        System.out.println("*** TASK: print matrix;");
+        printMatrix();
+        System.out.println();
+        System.out.println("*** TASK: prime numbers;");
+        printPrimeNumbers();
     }
 
     /**
@@ -49,7 +59,7 @@ public class HomeWork {
      * далее вывести массив на консоль
      */
     private static void printArray() {
-        String stringValue = readFromConsole("Enter integer number:");
+        String stringValue = readFromConsole("Enter size of array:");
         int arrayDimension = convertToInteger(stringValue);
         int[] array = createArrayWithRandomFilling(arrayDimension);
         System.out.println(Arrays.toString(array));
@@ -86,6 +96,7 @@ public class HomeWork {
      * вернуть number после выполнения операций
      */
     public static int operation(int number) {
+        System.out.printf("Original number: %d - processed number - ", number);
         if (number > 0) {
             return number += 1;
         }
@@ -101,6 +112,7 @@ public class HomeWork {
      * в котором это значение распечатается на консоль.
      */
     public static int calculateCountOfOddElementsInMatrix(int[] ints) {
+        System.out.print("Original array: " + Arrays.toString(ints) + "; Count odd elements: ");
         return (int) Arrays.stream(ints)
                 .filter(x -> x % 2 != 0)
                 .count();
@@ -168,15 +180,17 @@ public class HomeWork {
      * заполнить рандомно 2-х мерный массив и посчитать сумму элементов на диагонали
      */
     public static void calculateSumOfDiagonalElements() {
-        String value = readFromConsole("Enter integer number:");
+        String value = readFromConsole("Enter size two-dimension array:");
         int dimension = convertToInteger(value);
         int[][] array2dimension = create2DimArray(dimension, dimension);
         int summ = 0;
         print2DimArray(array2dimension);
+        System.out.print("Elements of diagonal: ");
         for (int i = 0; i < array2dimension.length; i++) {
             summ += array2dimension[i][i];
+            System.out.printf("%3d", array2dimension[i][i]);
         }
-        System.out.println(summ);
+        System.out.println("\nSum: " + summ);
     }
 
     private static int[][] create2DimArray(int rows, int cols) {
@@ -224,11 +238,13 @@ public class HomeWork {
         String dimensionY = readFromConsole("Enter second dimension of array:");
         int dimY = convertToInteger(dimensionY);
         int[][] array2dim = create2DimArray(dimX, dimY);
+        System.out.println("Original array:");
         print2DimArray(array2dim);
         System.out.println();
+        System.out.println("Processed array:");
         for (int[] row : array2dim) {
             for (int number : row) {
-                System.out.printf("%3s",processingNumber(number));
+                System.out.printf("%3s", processingNumber(number));
             }
             System.out.println();
         }
@@ -250,15 +266,24 @@ public class HomeWork {
      * что такое просто число (https://www.webmath.ru/poleznoe/formules_18_5.php)
      */
     public static void printPrimeNumbers() {
-        // тут пишем логику
+        Integer[] primeArray = getStartList().toArray(new Integer[0]);
+        System.out.println("Count of prime numbers: " + primeArray.length);
+        System.out.println("List of prime numbers: " + Arrays.toString(primeArray));
     }
 
-    private static List<Integer> getStartList(){
-        List<Integer> list = new ArrayList();
-        for (int i = 2; i < 1001 ; i++) {
-            list.add(i);
+    private static List<Integer> getStartList() {
+        List<Integer> primeList = new ArrayList<>();
+        for (int i = 2; i < 1001; i++) {
+            boolean isPrime = true;
+            for (int j = 2; j < i; j++) {
+                if (i % j == 0) {
+                    isPrime = false;
+                }
+            }
+            if (isPrime) {
+                primeList.add(i);
+            }
         }
-        return list;
+        return primeList;
     }
-
 }
