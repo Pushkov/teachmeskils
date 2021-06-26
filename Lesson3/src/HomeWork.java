@@ -33,6 +33,7 @@ public class HomeWork {
         countDevs(101);
         countDevs(109);
         countDevs(100);
+        countDevs(187);
         countDevs(1);
         countDevs(2);
         System.out.println();
@@ -59,8 +60,8 @@ public class HomeWork {
      * далее вывести массив на консоль
      */
     private static void printArray() {
-        String stringValue = readFromConsole("Enter size of array:");
-        int arrayDimension = convertToInteger(stringValue);
+        String arrayLengthInStringFormat = readFromConsole("Enter size of array:");
+        int arrayDimension = convertToInteger(arrayLengthInStringFormat);
         int[] array = createArrayWithRandomFilling(arrayDimension);
         System.out.println(Arrays.toString(array));
     }
@@ -98,12 +99,13 @@ public class HomeWork {
     public static int operation(int number) {
         System.out.printf("Original number: %d - processed number - ", number);
         if (number > 0) {
-            return number += 1;
+            number += 1;
+        } else if (number == 0) {
+            number = 10;
+        } else {
+            number -= 2;
         }
-        if (number == 0) {
-            return 10;
-        }
-        return number -= 2;
+        return number;
     }
 
     /**
@@ -128,10 +130,22 @@ public class HomeWork {
      * @param count - количество программистов
      */
     public static void countDevs(int count) {
-        System.out.println(count + " програмист" + getEnding(count));
+        System.out.println("Сделано с SWITCH: " + count + " программист" + getEndingSwitch(count));
+        System.out.println("Сделано с IF: " + count + " программист" + getEndingIf(count));
     }
 
-    private static String getEnding(int count) {
+    private static String getEndingIf(int count) {
+        String ending = "";
+        if (count % 10 >= 2) {
+            ending = "а";
+        }
+        if (count % 10 >= 5 || count % 10 == 0 || (count >= 11 & count <= 14)) {
+            ending = "ов";
+        }
+        return ending;
+    }
+
+    private static String getEndingSwitch(int count) {
         switch (count) {
             case 11:
             case 12:
@@ -156,6 +170,7 @@ public class HomeWork {
         }
     }
 
+
     /**
      * Метод должен выводить разные строки в консоли в зависимости от некоторых условий:
      * - если остаток от деления на 3 равен нулю - выведите "foo" (example of number - 6)
@@ -166,13 +181,11 @@ public class HomeWork {
         int remainder3 = number % 3;
         int remainder5 = number % 5;
         if (remainder3 == 0 && remainder5 != 0) {
-            System.out.println(number + " divisible only by 3");
+            System.out.println("foo");
         } else if (remainder3 != 0 && remainder5 == 0) {
-            System.out.println(number + " divisible only by 5");
+            System.out.println("bar");
         } else if (remainder3 == 0 && remainder5 == 0) {
-            System.out.println(number + " divisible by 3 and 5");
-        } else {
-            System.out.println(number + " not divisible by 3 and 5");
+            System.out.println("foobar");
         }
     }
 
