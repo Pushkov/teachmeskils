@@ -5,26 +5,26 @@ import java.util.Random;
 
 public class HomeWork {
     public static void main(String[] args) {
-        //1)
-//        cellDoubling();
-//        2)
-//        System.out.println("Произведение: " + summ(5,3));
-//        3)
-//        fourTriangle();
-//        4)
-//        numberOfDigits();
-//        5)
-//        printReverseArray();
-//        6)
-//        indexOfMaxElement();
-//        7)
-//        replaceOddElements();
-//        8)
-//        changeMinMax();
-//        9)
-//        findDuplicatedElements();
-//        10)
-//        transposeMatrix();
+        System.out.println("TASK 1: подсчет числа амеб");
+        cellDoubling();
+        System.out.println("TASK 2: произведение сложением");
+        System.out.println("Произведение: " + summ(5, 3));
+        System.out.println("TASK 3: четыре треугольника");
+        fourTriangle();
+        System.out.println("TASK 4: количество цифр в числе");
+        numberOfDigits();
+        System.out.println("TASK 5: печать прямого и развернутого массивов");
+        printReverseArray();
+        System.out.println("TASK 6: последнее входнение максимального элемента");
+        indexOfLastMaxElement();
+        System.out.println("TASK 7: замена нечетных жлементов на 0");
+        replaceOddElements();
+        System.out.println("TASK 8: перемена мест нулевого элемента и максимального");
+        changeFirstAndMax();
+        System.out.println("TASK 9: поиск дубликатов в массиве");
+        findDuplicatedElements();
+        System.out.println("TASK 10: транспонирование матрицы");
+        transposeMatrix();
     }
 
     //         1) Одноклеточная амеба каждые 3 часа делится на 2 клетки. Определить,
@@ -129,7 +129,7 @@ public class HomeWork {
     //        6) Создайте массив из int[] mass = new int[12]; Рандомно заполните его значениями от 0 до 15.
 //        Определите какой элемент является в этом массиве максимальным и сообщите индекс его последнего вхождения в массив.
 //        Пример: {3,4,5,62,7,8,4,-5,7,62,5,1} Максимальный элемент 62, индекс его последнего вхождения в массив = 10
-    private static void indexOfMaxElement() {
+    private static void indexOfLastMaxElement() {
         Random random = new Random();
         int maxElement = 0;
         int indexMax = 0;
@@ -168,7 +168,7 @@ public class HomeWork {
     }
 
     //        8) Найти максимальный элемент в массиве {4,5,0,23,77,0,8,9,101,2} и поменять его местами с нулевым элементом
-    private static void changeMinMax() {
+    private static void changeFirstAndMax() {
         int size = InputUtils.readIntFromConsole("Введите длину массива: ", true);
         int bound = InputUtils.readIntFromConsole("Введите максимально возможное значение ячейки: ", true);
         int[] array = InputUtils.createArrayWithRandomElements(size, bound);
