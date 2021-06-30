@@ -61,7 +61,40 @@ public class HomeWork {
 //            * *        * *
 //              *        *
     private static void fourTriangle() {
-
+        String[][] array = {
+                {" ", " ", " ", "*"},
+                {" ", " ", "*", "*"},
+                {" ", "*", "*", "*"},
+                {"*", "*", "*", "*"}
+        };
+        System.out.println("a)");
+        for (int i = 0; i < array.length; i++) {
+            for (int j = 0; j < array[i].length; j++) {
+                System.out.printf("%2s", array[i][j]);
+            }
+            System.out.println();
+        }
+        System.out.println("b)");
+        for (int i = 0; i < array.length; i++) {
+            for (int j = array[i].length - 1; j >= 0; j--) {
+                System.out.printf("%2s", array[i][j]);
+            }
+            System.out.println();
+        }
+        System.out.println("c)");
+        for (int i = array.length - 1; i >= 0; i--) {
+            for (int j = 0; j < array[i].length; j++) {
+                System.out.printf("%2s", array[i][j]);
+            }
+            System.out.println();
+        }
+        System.out.println("d)");
+        for (int i = array.length - 1; i >= 0; i--) {
+            for (int j = array[i].length - 1; j >= 0; j--) {
+                System.out.printf("%2s", array[i][j]);
+            }
+            System.out.println();
+        }
     }
 
     //        4)В переменную записываем число.
