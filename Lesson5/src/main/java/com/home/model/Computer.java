@@ -1,11 +1,12 @@
 package com.home.model;
 
+import com.home.service.InputUtils;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.util.Scanner;
+import java.util.Random;
 
 @AllArgsConstructor
 @Getter
@@ -19,18 +20,50 @@ public class Computer {
     private Integer resource;
 
     public void on() {
-        Scanner scanner = new Scanner(System.in);
-        int startCode = -1;
-        do {
-            System.out.println("Введите 0 или 1: ");
-            while (scanner.hasNextInt()) {
-                System.out.println("Проверьте введенные данные!");
-                scanner.next();
+        System.out.println("Компьютер включяется....");
+        try {
+            Thread.sleep(1500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        if (this.resource == 0) {
+            crashed();
+        } else {
+            System.out.println("Компьютер включился");
+            int userStartupCode = InputUtils.readStartupCode();
+            int systemStartupCode = new Random().nextInt(2);
+            if (userStartupCode != systemStartupCode) {
+                crashed();
             }
-            startCode = scanner.nextInt();
+        }
+    }
 
-        } while (startCode != 1 || startCode != 0);
-        System.out.println("Компьютер запущен");
-        scanner.close();
+    public void info() {
+        System.out.println("Информация о компьютере: ");
+        if (this.resource > 0) {
+            System.out.println(this);
+        } else {
+            crashed();
+        }
+    }
+
+    public void off() {
+        System.out.println("Компьютер выключяется....");
+        if (this.resource > 0) {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            this.resource--;
+            System.out.println("Компьютер выключен.");
+        } else {
+            crashed();
+        }
+    }
+
+    public void crashed() {
+        this.resource = 0;
+        System.out.println("Компьютер сгорел.");
     }
 }
