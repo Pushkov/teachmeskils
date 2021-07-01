@@ -1,22 +1,21 @@
 package com.home.model;
 
 import com.home.service.InputUtils;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.Data;
+import lombok.NonNull;
 
 import java.util.Random;
 
-@AllArgsConstructor
-@Getter
-@Setter
-@ToString
+@Data
 public class Computer {
 
+    @NonNull
     private String processor;
+    @NonNull
     private Integer quantityRAM;
+    @NonNull
     private Integer quantityHDD;
+    @NonNull
     private Integer resource;
 
     public void on() {
