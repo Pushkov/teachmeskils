@@ -9,6 +9,11 @@ public class HomeWork {
         cellDoubling();
         System.out.println("TASK 2: произведение сложением");
         System.out.println("Произведение: " + summ(5, 3));
+        System.out.println("Произведение: " + summ(-5, 3));
+        System.out.println("Произведение: " + summ(5, -3));
+        System.out.println("Произведение: " + summ(-5, -3));
+        System.out.println("Произведение: " + summ(0, -3));
+        System.out.println("Произведение: " + summ(-5, 0));
         System.out.println("TASK 3: четыре треугольника");
         fourTriangle();
         System.out.println("TASK 4: количество цифр в числе");
@@ -42,8 +47,11 @@ public class HomeWork {
 //        умножения, где a и b целые числа, вызовите метод summ  в методе main и распечатайте на консоль.
     private static int summ(int a, int b) {
         int result = 0;
-        for (int i = 0; i < b; i++) {
-            result += a;
+        for (int i = 0; i < Math.abs(b); i++) {
+            result += Math.abs(a);
+        }
+        if ((a > 0 && b < 0) || (a < 0 && b > 0)) {
+            result = -result;
         }
         return result;
     }
@@ -103,24 +111,26 @@ public class HomeWork {
 //        "5 - это положительное число, количество цифр = 1"
     private static void numberOfDigits() {
         int number = InputUtils.readIntFromConsole("Введите произольное целое число", false);
+        int sourceNumber = number;
         int count = (number == 0) ? 1 : 0;
+        String numberStatus = (number > 0) ? "положительное" : "отрицательное";
         while (number != 0) {
             count++;
             number /= 10;
         }
-        System.out.println("Количество цифр: " + count);
+        System.out.printf("%d - это %s число, количество цифр: %d", sourceNumber, numberStatus, count);
     }
 
     //        5) Создайте массив из всех нечётных чисел от 1 до 100, выведите его на экран в строку,
 //        а затем этот же массив выведите на экран тоже в строку, но в обратном порядке (99 97 95 93 ... 7 5 3 1).
     private static void printReverseArray() {
         System.out.print("(");
-        for (int i = 1; i < 100; i++) {
+        for (int i = 1; i < 100; i += 2) {
             System.out.printf("%3d", i);
         }
         System.out.println(" )");
         System.out.print("(");
-        for (int i = 99; i > 0; i--) {
+        for (int i = 99; i > 0; i -= 2) {
             System.out.printf("%3d", i);
         }
         System.out.println(" )");

@@ -16,17 +16,24 @@ public class InputUtils {
             }
             number = scanner.nextInt();
             if (onlyPositive) {
-                if (number > 0) {
-                    isPositiveNumber = false;
-                } else {
-                    System.out.println("Введенное не является ПОЛОЖИТЕЛЬНЫМ целым числом.");
-                }
+                isPositiveNumber = checkNumberIsPositive(number);
             } else {
                 isPositiveNumber = false;
             }
         } while (isPositiveNumber);
         return number;
     }
+
+    private static boolean checkNumberIsPositive(int number) {
+        boolean isPositiveNumber = true;
+        if (number > 0) {
+            isPositiveNumber = false;
+        } else {
+            System.out.println("Введенное не является ПОЛОЖИТЕЛЬНЫМ целым числом.");
+        }
+        return isPositiveNumber;
+    }
+
 
     public static int[] createArrayWithRandomElements(int size) {
         int[] array;
