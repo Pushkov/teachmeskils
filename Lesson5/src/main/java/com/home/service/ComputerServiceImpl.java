@@ -14,19 +14,19 @@ public class ComputerServiceImpl implements ComputerService {
     public void on(Computer computer) {
         if (!hasComputerInWork(computer)) {
             if (hasResource(computer)) {
-                System.out.println("(on)Компьютер запускается...");
+                System.out.printf("(on)Компьютер %s запускается...\n", computer.getProcessor());
                 setDelay(1000);
                 if (!checkStartupCode()) {
                     crashed(computer);
                     return;
                 }
-                System.out.println("Компьтер работает");
+                System.out.printf("Компьтер %s работает\n", computer.getProcessor());
                 computersInWork.add(computer);
             } else {
-                System.out.println("Компьютер неисправен...");
+                System.out.printf("Компьютер %s неисправен...\n", computer.getProcessor());
             }
         } else {
-            System.out.println("(on) Компьютер уже работает");
+            System.out.printf("(on) Компьютер %s уже работает", computer.getProcessor());
         }
     }
 
@@ -35,21 +35,21 @@ public class ComputerServiceImpl implements ComputerService {
         if (hasComputerInWork(computer)) {
             System.out.println("(info)" + computer.toString());
         } else {
-            System.out.println("(info) Компьютр выключен или неисправен");
+            System.out.printf("(info) Компьютр %s выключен или неисправен\n", computer.getProcessor());
         }
     }
 
     @Override
     public void off(Computer computer) {
         if (hasComputerInWork(computer)) {
-            System.out.println("(off)Компьютер выключается ...");
+            System.out.printf("(off)Компьютер %s выключается ...\n", computer.getProcessor());
             setDelay(1000);
             int resource = computer.getResource();
             computer.setResource(--resource);
             computersInWork.remove(computer);
-            System.out.println("Компьютер выключился.");
+            System.out.printf("Компьютер %s выключился.\n", computer.getProcessor());
         } else {
-            System.out.println("(off) Компьютр выключен или неисправен");
+            System.out.printf("(off) Компьютр %s выключен или неисправен\n", computer.getProcessor());
         }
     }
 
@@ -60,7 +60,7 @@ public class ComputerServiceImpl implements ComputerService {
 
     @Override
     public void crashed(Computer computer) {
-        System.out.println("Компьютер сгорел....");
+        System.out.printf("Компьютер %s сгорел....", computer.getProcessor());
         computer.setResource(0);
         computersInWork.remove(computer);
 
