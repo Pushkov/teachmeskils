@@ -7,7 +7,7 @@ public class InputUtils {
     public static int readStartupCode() {
         Scanner scanner = new Scanner(System.in);
         boolean isCodeCorrect = false;
-        int startCode = -1;
+        int startCode;
         System.out.println("Введите 0 или 1: ");
         do {
             while (!scanner.hasNextInt()) {
