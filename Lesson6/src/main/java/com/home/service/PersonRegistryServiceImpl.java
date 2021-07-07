@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class PersonRegistryServiceImpl implements PersonRegistryService {
+
     private final PersonRegistry personRegistry;
 
     public PersonRegistryServiceImpl(PersonRegistry personRegistry) {

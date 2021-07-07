@@ -32,11 +32,19 @@ public class HomeWork6 {
         MilitaryOffice office = new MilitaryOffice(registryService);
         office.addPersonsToRegisrtyOffice(initialiseList());
 
+        System.out.println("Список всех военнообязанных:");
         printList(registryService.getAllPersons());
-        printList(registryService.getAllSuitablePersons());
+        System.out.println();
+        System.out.println("Список всех военнообязанных подлежащих призыву:");
         printList(registryService.getAllSuitablePersonsBySex(Sex.MALE));
-        printList(registryService.getAllSuitablePersonsByBetweenAge(25, 27));
-
+        System.out.println();
+        System.out.printf("%d - Количество призывников в городе %s \n", office.getCountSuitablePersonsInCity("Минск"), "Минск");
+        System.out.println();
+        Integer low = 25;
+        Integer hi = 27;
+        System.out.println(
+                office.getCountSuitablePersonsByBetweenAgeAndSex(low, hi, Sex.MALE)
+                        + " - Количество призывников от " + low + " до " + hi + "  лет");
     }
 
     private static List<Person> initialiseList() {
@@ -55,7 +63,6 @@ public class HomeWork6 {
     }
 
     private static void printList(List<?> list) {
-        System.out.println(" ******************************** ");
         for (Object p : list) {
             System.out.println(p);
         }
