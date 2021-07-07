@@ -11,10 +11,6 @@
 
     <modules>
         <module>Lesson5</module>
-<<<<<<< HEAD
-=======
-        <!--        <module>Lesson6</module>-->
->>>>>>> origin/main
     </modules>
 
     <dependencies>
