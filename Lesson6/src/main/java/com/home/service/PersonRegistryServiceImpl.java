@@ -7,6 +7,9 @@ import com.home.model.PersonRegistry;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.home.constant.Constants.MAX_AGE;
+import static com.home.constant.Constants.MIN_AGE;
+
 public class PersonRegistryServiceImpl implements PersonRegistryService {
 
     private final PersonRegistry personRegistry;
@@ -17,12 +20,12 @@ public class PersonRegistryServiceImpl implements PersonRegistryService {
 
     @Override
     public void addPerson(Person person) {
-        personRegistry.getPersonList().add(person);
+        getAllPersons().add(person);
     }
 
     @Override
     public void addPersons(List<Person> persons) {
-        personRegistry.getPersonList().addAll(persons);
+        getAllPersons().addAll(persons);
     }
 
     @Override
@@ -32,16 +35,12 @@ public class PersonRegistryServiceImpl implements PersonRegistryService {
 
     @Override
     public List<Person> getAllSuitablePersons() {
-        Integer lowBound = 18;
-        Integer hiBound = 27;
-        return getAllSuitablePersonsByBetweenAge(lowBound, hiBound);
+        return getAllSuitablePersonsByBetweenAge(MIN_AGE, MAX_AGE);
     }
 
     @Override
     public List<Person> getAllSuitablePersonsBySex(Sex sex) {
-        Integer lowBound = 18;
-        Integer hiBound = 27;
-        return getAllSuitablePersonsByBetweenAgeAndSex(lowBound, hiBound, sex);
+        return getAllSuitablePersonsByBetweenAgeAndSex(MAX_AGE, MAX_AGE, sex);
     }
 
     @Override
@@ -93,7 +92,7 @@ public class PersonRegistryServiceImpl implements PersonRegistryService {
     public Long getCountSuitablePersonsInCity(String city) {
         return personRegistry.getPersonList()
                 .stream()
-                .filter(p -> p.getCity().equals(city))
+                .filter(p -> p.getAddress().getCity().equals(city))
                 .count();
     }
 

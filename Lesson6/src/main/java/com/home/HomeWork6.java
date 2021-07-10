@@ -1,6 +1,6 @@
 package com.home;
 
-import com.home.constant.Sex;
+import com.home.model.Address;
 import com.home.model.Person;
 import com.home.model.PersonRegistry;
 import com.home.service.MilitaryOffice;
@@ -8,6 +8,9 @@ import com.home.service.PersonRegistryService;
 import com.home.service.PersonRegistryServiceImpl;
 
 import java.util.List;
+
+import static com.home.constant.Sex.FEMALE;
+import static com.home.constant.Sex.MALE;
 
 public class HomeWork6 {
     public static void main(String[] args) {
@@ -36,29 +39,29 @@ public class HomeWork6 {
         printList(registryService.getAllPersons());
         System.out.println();
         System.out.println("Список всех военнообязанных подлежащих призыву:");
-        printList(registryService.getAllSuitablePersonsBySex(Sex.MALE));
+        printList(registryService.getAllSuitablePersonsBySex(MALE));
         System.out.println();
         System.out.printf("%d - Количество призывников в городе %s \n", office.getCountSuitablePersonsInCity("Минск"), "Минск");
         System.out.println();
         Integer low = 25;
         Integer hi = 27;
         System.out.println(
-                office.getCountSuitablePersonsByBetweenAgeAndSex(low, hi, Sex.MALE)
+                office.getCountSuitablePersonsByBetweenAgeAndSex(low, hi, MALE)
                         + " - Количество призывников от " + low + " до " + hi + "  лет");
     }
 
     private static List<Person> initialiseList() {
         return List.of(
-                new Person("Василий", 15, Sex.MALE, "РБ", "Минск"),
-                new Person("Александр", 21, Sex.MALE, "РБ", "Гомель"),
-                new Person("Ирина", 15, Sex.FEMALE, "РБ", "Минск"),
-                new Person("Федор", 26, Sex.MALE, "РБ", "Витебск"),
-                new Person("Ольга", 19, Sex.FEMALE, "РБ", "Брест"),
-                new Person("Наталья", 25, Sex.FEMALE, "РБ", "Гродно"),
-                new Person("Илья", 27, Sex.MALE, "РБ", "Могилев"),
-                new Person("Матвей", 31, Sex.MALE, "РБ", "Минск"),
-                new Person("Николай", 42, Sex.MALE, "РБ", "Минск"),
-                new Person("Александр", 18, Sex.MALE, "РБ", "Минск")
+                new Person("Василий", 15, MALE, new Address("РБ", "Минск")),
+                new Person("Александр", 21, MALE, new Address("РБ", "Гомель")),
+                new Person("Ирина", 15, FEMALE, new Address("РБ", "Минск")),
+                new Person("Федор", 26, MALE, new Address("РБ", "Витебск")),
+                new Person("Ольга", 19, FEMALE, new Address("РБ", "Брест")),
+                new Person("Наталья", 25, FEMALE, new Address("РБ", "Гродно")),
+                new Person("Илья", 27, MALE, new Address("РБ", "Могилев")),
+                new Person("Матвей", 31, MALE, new Address("РБ", "Минск")),
+                new Person("Николай", 42, MALE, new Address("РБ", "Минск")),
+                new Person("Александр", 18, MALE, new Address("РБ", "Минск"))
         );
     }
 

@@ -15,6 +15,5 @@ public class Person {
     private String name;
     private Integer age;
     private Sex sex;
-    private String country;
-    private String city;
+    private Address address;
 }
