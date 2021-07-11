@@ -2,7 +2,7 @@ package com.home.service;
 
 import com.home.model.PassengerGroundTransport;
 
-import static com.home.util.CalculationsUtils.getMovingTime;
+import static com.home.util.CalculationsUtils.readDataFromConsole;
 
 public class PassengersGroundTransportServiceImpl implements TransportService {
 
@@ -14,7 +14,7 @@ public class PassengersGroundTransportServiceImpl implements TransportService {
 
     @Override
     public void basicAction() {
-        double movingTime = getMovingTime();
+        double movingTime = readDataFromConsole("Введите время движения легкового автомобиля");
         System.out.println("> " + movingTime);
         System.out.printf("  За время %f ч, автомобиль %s\n" +
                         "двигаясь с максимальной скоростью %d км/ч\n" +

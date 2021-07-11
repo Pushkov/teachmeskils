@@ -12,12 +12,12 @@ public class CalculationsUtils {
         return (int) Math.round(powerInKiloWatt / 0.74);
     }
 
-    public static double getMovingTime() {
+    public static double readDataFromConsole(String message) {
         Scanner scanner = new Scanner(System.in);
         double number;
         boolean isPositiveNumber = true;
         do {
-            System.out.println("Введите время движения легкового автомобиля:");
+            System.out.println(message + ":");
             while (!scanner.hasNextDouble()) {
                 System.out.println("Введенное не является числом.");
                 scanner.next();
