@@ -16,7 +16,7 @@ public class PassengersGroundTransportServiceImpl implements TransportService {
     public void basicAction() {
         double movingTime = getMovingTime();
         System.out.println("> " + movingTime);
-        System.out.printf("За время %f ч, автомобиль %s\n" +
+        System.out.printf("  За время %f ч, автомобиль %s\n" +
                         "двигаясь с максимальной скоростью %d км/ч\n" +
                         "проедет %f км и израсходует %f литров топлива.\n",
                 movingTime,
@@ -29,7 +29,7 @@ public class PassengersGroundTransportServiceImpl implements TransportService {
 
     @Override
     public void advancedAction() {
-        System.out.println("У легкового автомобиля нет дополнительных функций");
+        System.out.println("  У легкового автомобиля нет дополнительных функций");
     }
 
     private double getMovingDistance(double movingTime) {

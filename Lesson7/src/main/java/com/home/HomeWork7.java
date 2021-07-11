@@ -14,7 +14,9 @@ public class HomeWork7 {
         transportList = initListOfTransport();
         TransportSelectorService transportSelectorService = new TransportSelectorService();
         for (Transport t : transportList) {
+            System.out.println();
             TransportService service = transportSelectorService.createService(t);
+            System.out.println(t);
             service.basicAction();
             service.advancedAction();
         }
