@@ -1,16 +1,14 @@
 package com.home.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 import static com.home.util.CalculationsUtils.powerToHP;
 
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@SuperBuilder
 public class MilitaryAirTransport extends AirTransport {
     private Integer rocketCount;
     private boolean isCatapultAvailable;

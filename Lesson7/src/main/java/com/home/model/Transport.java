@@ -1,12 +1,12 @@
 package com.home.model;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@ToString
+@SuperBuilder
 public class Transport {
     private String model;
     private Integer power;
