@@ -1,10 +1,10 @@
-package com.home.utils;
+package com.tms.utils;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import static com.home.utils.Constants.DATE_TIME_FORMAT;
-import static com.home.utils.Constants.DATE_TIME_FORMAT1;
+import static com.tms.utils.Constants.DATE_TIME_FORMAT;
+import static com.tms.utils.Constants.DATE_TIME_FORMAT1;
 
 public class DateUtils {
     public static String print(Date date) {

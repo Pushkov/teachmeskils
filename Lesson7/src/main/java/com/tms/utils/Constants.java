@@ -1,4 +1,4 @@
-package com.home.utils;
+package com.tms.utils;
 
 public class Constants {
     public static final String DATE_TIME_FORMAT = "HH:mm:ss";

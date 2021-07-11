@@ -1,6 +1,6 @@
-package com.home.service;
+package com.tms.service;
 
-import com.home.model.Computer;
+import com.tms.model.Computer;
 
 public class Main {
     public static void main(String[] args) {

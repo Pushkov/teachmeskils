@@ -1,4 +1,4 @@
-package com.home.model;
+package com.tms.model;
 
 public class Person {
     private static int age = 10;

@@ -1,6 +1,6 @@
-package com.home;
+package com.tms;
 
-import com.home.model.Person;
+import com.tms.model.Person;
 
 public class Main {
     public static void main(String[] args) {
