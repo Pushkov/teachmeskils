@@ -1,6 +1,9 @@
 package com.home.service;
 
+import com.home.exeptions.NoFreeVolumeInFuelTankExeption;
 import com.home.model.FuelTank;
+
+import static com.home.utils.HomeWork8Utils.getEnding;
 
 public class FuelTankServiceImpl implements FuelTankService {
     private final FuelTank fuelTank;
@@ -10,17 +13,38 @@ public class FuelTankServiceImpl implements FuelTankService {
     }
 
     @Override
+    public boolean isEmpty() {
+        return getFuelLevel() == 0;
+    }
+
+    @Override
     public int getCapacity() {
-        return fuelTank.g;
+        return fuelTank.getFuelCapacity();
     }
 
     @Override
     public int getFuelLevel() {
-        return 0;
+        return fuelTank.getFuelLevel();
     }
 
     @Override
-    public void refuel() {
+    public int refuel() {
+        int refuelVolume = fuelTank.getFuelCapacity() - fuelTank.getFuelLevel();
+        fuelTank.setFuelLevel(fuelTank.getFuelCapacity());
+        return refuelVolume;
+    }
 
+    @Override
+    public int refuel(int fuelVolume) {
+        int emptyVolume = getCapacity() - getFuelLevel();
+        int resultRefuelVolume;
+        if (fuelVolume > emptyVolume) {
+            throw new NoFreeVolumeInFuelTankExeption("Вы хотите залить " + fuelVolume + " литр" + getEnding(fuelVolume) + " топлива,"
+                    + " а свободного объема только " + emptyVolume + " литр" + getEnding(emptyVolume));
+        } else {
+            fuelTank.setFuelLevel(getFuelLevel() + fuelVolume);
+            resultRefuelVolume = fuelVolume;
+        }
+        return resultRefuelVolume;
     }
 }

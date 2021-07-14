@@ -1,7 +1,9 @@
 package com.home.service;
 
 public interface FuelTankService {
+    boolean isEmpty();
     int getCapacity();
     int getFuelLevel();
-    void refuel();
+    int refuel();
+    int refuel(int fuelVolume);
 }

@@ -1,16 +1,17 @@
 package com.home.service;
 
 public interface CarService {
+    void carInfo();
+    boolean isEngineRunning();
+    boolean isMoving();
     void startEngine();
-
-    void go();
-
-    void stop();
-
+    void startMoving();
+    void stopMoving();
     void stopEngine();
-
-    int getTraveledDistance();
-
-    int getFuelLevel();
-
+    boolean isFuelEmpty();
+    void viewFuelLevel();
+    void refueling();
+    void refueling(int fuelVolume);
+    void showCurrentTraveledDistance();
+    void showTotalTraveledDistance();
 }

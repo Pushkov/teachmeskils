@@ -1,5 +1,11 @@
 package com.home;
 
+import com.home.model.Car;
+import com.home.model.Engine;
+import com.home.model.FuelTank;
+import com.home.service.CarService;
+import com.home.service.CarServiceImpl;
+
 public class HomeWork8 {
     public static void main(String[] args) {
     /*
@@ -22,5 +28,35 @@ public class HomeWork8 {
  - Реализуйте пару полей для двигателя и бензобака, например: тип двигателя, общий объем бензобака,
  сколько бензина сейчас и т.д.
      */
+        CarService carService = new CarServiceImpl(initCar());
+        carService.carInfo();
+        carService.viewFuelLevel();
+        carService.refueling(53);
+        carService.refueling(70);
+        carService.refueling(2);
+        carService.viewFuelLevel();
+        carService.startEngine();
+        carService.startMoving();
+        carService.stopMoving();
+        carService.showCurrentTraveledDistance();
+        carService.startMoving();
+        carService.stopMoving();
+        carService.showCurrentTraveledDistance();
+        carService.startMoving();
+        carService.stopEngine();
+        carService.stopMoving();
+        carService.showCurrentTraveledDistance();
+        carService.stopEngine();
+        carService.showTotalTraveledDistance();
     }
+
+    private static Car initCar(){
+        Car car = new Car(new Engine("diesel",2000),new FuelTank(64));
+        car.setModel("Mazda");
+        car.setColor("Red");
+        car.setYearOfIssue(1991);
+        car.setMaxSpeed(160);
+        return car;
+    }
+
 }
