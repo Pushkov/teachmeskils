@@ -10,6 +10,11 @@
     <version>1.0-SNAPSHOT</version>
 
     <modules>
+        <module>Lesson1</module>
+        <module>Lesson1_adv</module>
+        <module>Lesson2</module>
+        <module>Lesson3</module>
+        <module>Lesson4</module>
         <module>Lesson5</module>
         <module>Lesson6</module>
     </modules>
