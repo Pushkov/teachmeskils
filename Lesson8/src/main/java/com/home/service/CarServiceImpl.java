@@ -60,8 +60,8 @@ public class CarServiceImpl implements CarService {
         if (isMoving()) {
             setCarMoving(false);
             int distance = car.getCurrentSpeed() * 2; // машина ехала 2 часа для примера
-            setCurrentTraveledDistance(distance);
-            setTotalTraveledDistance(distance);
+            car.setTraveledDistance(distance);
+            updateTotalTraveledDistance(distance);
             System.out.println("Автомобиль остановился.");
         }
     }
@@ -98,28 +98,16 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public void showCurrentTraveledDistance() {
-        System.out.println("Расстояние последней поездки: " + getTraveledDistance() +  " км.");
-    }
-
-    public int getTraveledDistance() {
-        return car.getTraveledDistance();
-    }
-
-    private void setCurrentTraveledDistance(int distance) {
-        car.setTraveledDistance(distance);
+        System.out.println("Расстояние последней поездки: " + car.getTraveledDistance() + " км.");
     }
 
     @Override
     public void showTotalTraveledDistance() {
-        System.out.println("Общий пробег автомобиля: " + getTotalTraveledDistance() +  " км.");
+        System.out.println("Общий пробег автомобиля: " + car.getTotalTraveledDistance() + " км.");
     }
 
-    public int getTotalTraveledDistance() {
-        return car.getTotalTraveledDistance();
-    }
-
-    private void setTotalTraveledDistance(int distance) {
-        car.setTotalTraveledDistance(getTotalTraveledDistance() + distance);
+    private void updateTotalTraveledDistance(int distance) {
+        car.setTotalTraveledDistance(car.getTotalTraveledDistance() + distance);
     }
 
     private void setCarMoving(boolean isMove) {

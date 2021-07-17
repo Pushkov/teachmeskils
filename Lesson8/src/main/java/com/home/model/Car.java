@@ -16,10 +16,7 @@ public class Car {
     private boolean isMoving;
     private int maxSpeed;
     private int currentSpeed;
-
-//    @Setter(AccessLevel.NONE)
     private final Engine engine;
-//    @Setter(AccessLevel.NONE)
     private final FuelTank fuelTank;
 
     public Car(Engine engine, FuelTank fuelTank) {

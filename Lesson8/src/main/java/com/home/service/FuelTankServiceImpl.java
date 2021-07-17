@@ -35,7 +35,7 @@ public class FuelTankServiceImpl implements FuelTankService {
     }
 
     @Override
-    public int refuel(int fuelVolume) {
+    public int refuel(int fuelVolume) throws NoFreeVolumeInFuelTankExeption {
         int emptyVolume = getCapacity() - getFuelLevel();
         int resultRefuelVolume;
         if (fuelVolume > emptyVolume) {
