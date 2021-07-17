@@ -14,9 +14,9 @@ public class EngineServiceImpl implements EngineService {
     public void start() {
         if (!isRunning()) {
             engine.setRunning(true);
-            System.out.println("Двигатель заведен");
+            System.out.println("Р”РІРёРіР°С‚РµР»СЊ Р·Р°РІРµРґРµРЅ");
         } else {
-            System.out.println("Двигатель уже работает");
+            System.out.println("Р”РІРёРіР°С‚РµР»СЊ СѓР¶Рµ СЂР°Р±РѕС‚Р°РµС‚");
         }
     }
 
@@ -24,9 +24,9 @@ public class EngineServiceImpl implements EngineService {
     public void stop() {
         if (isRunning()) {
             engine.setRunning(false);
-            System.out.println("Двигатель заглушен");
+            System.out.println("Р”РІРёРіР°С‚РµР»СЊ Р·Р°РіР»СѓС€РµРЅ");
         } else {
-            System.out.println("Двигатель уже не работает");
+            System.out.println("Р”РІРёРіР°С‚РµР»СЊ СѓР¶Рµ РЅРµ СЂР°Р±РѕС‚Р°РµС‚");
         }
     }
 

@@ -30,9 +30,9 @@ public class CarServiceImpl implements CarService {
         if (!isEngineRunning() && !isFuelEmpty()) {
             engineService.start();
         } else if (isEngineRunning()) {
-            System.out.println("Двигатель уже работает");
+            System.out.println("Р”РІРёРіР°С‚РµР»СЊ СѓР¶Рµ СЂР°Р±РѕС‚Р°РµС‚");
         } else if (isFuelEmpty()) {
-            System.out.println("Заправьте автомобиль");
+            System.out.println("Р—Р°РїСЂР°РІСЊС‚Рµ Р°РІС‚РѕРјРѕР±РёР»СЊ");
         }
     }
 
@@ -40,9 +40,9 @@ public class CarServiceImpl implements CarService {
         if (isEngineRunning() && !isMoving()) {
             engineService.stop();
         } else if (!isEngineRunning()) {
-            System.out.println("Двигатель не заведен");
+            System.out.println("Р”РІРёРіР°С‚РµР»СЊ РЅРµ Р·Р°РІРµРґРµРЅ");
         } else if (isMoving()) {
-            System.out.println("Сначала остановите автомобиль");
+            System.out.println("РЎРЅР°С‡Р°Р»Р° РѕСЃС‚Р°РЅРѕРІРёС‚Рµ Р°РІС‚РѕРјРѕР±РёР»СЊ");
         }
     }
 
@@ -50,19 +50,19 @@ public class CarServiceImpl implements CarService {
         if (isEngineRunning()) {
             setCarMoving(true);
             setCarCurrentSpeed();
-            System.out.println("Автомобиль поехал со скоростью " + car.getCurrentSpeed() + " км/ч");
+            System.out.println("РђРІС‚РѕРјРѕР±РёР»СЊ РїРѕРµС…Р°Р» СЃРѕ СЃРєРѕСЂРѕСЃС‚СЊСЋ " + car.getCurrentSpeed() + " РєРј/С‡");
         } else {
-            System.out.println("Заведите двигатель");
+            System.out.println("Р—Р°РІРµРґРёС‚Рµ РґРІРёРіР°С‚РµР»СЊ");
         }
     }
 
     public void stopMoving() {
         if (isMoving()) {
             setCarMoving(false);
-            int distance = car.getCurrentSpeed() * 2; // машина ехала 2 часа для примера
+            int distance = car.getCurrentSpeed() * 2; // РјР°С€РёРЅР° РµС…Р°Р»Р° 2 С‡Р°СЃР° РґР»СЏ РїСЂРёРјРµСЂР°
             setCurrentTraveledDistance(distance);
             setTotalTraveledDistance(distance);
-            System.out.println("Автомобиль остановился.");
+            System.out.println("РђРІС‚РѕРјРѕР±РёР»СЊ РѕСЃС‚Р°РЅРѕРІРёР»СЃСЏ.");
         }
     }
 
@@ -77,20 +77,20 @@ public class CarServiceImpl implements CarService {
     }
 
     public void viewFuelLevel() {
-        System.out.println("Текущий уровень топлива: " + fuelTankService.getFuelLevel());
+        System.out.println("РўРµРєСѓС‰РёР№ СѓСЂРѕРІРµРЅСЊ С‚РѕРїР»РёРІР°: " + fuelTankService.getFuelLevel());
     }
 
     @Override
     public void refueling() {
         int refuelVolume = fuelTankService.refuel();
-        System.out.println("Автомобиль заправлен " + refuelVolume + " литр" + getEndingForRefueling(refuelVolume) + " топлива.");
+        System.out.println("РђРІС‚РѕРјРѕР±РёР»СЊ Р·Р°РїСЂР°РІР»РµРЅ " + refuelVolume + " Р»РёС‚СЂ" + getEndingForRefueling(refuelVolume) + " С‚РѕРїР»РёРІР°.");
     }
 
     @Override
     public void refueling(int fuelVolume) {
         try {
             int refuelVolume = fuelTankService.refuel(fuelVolume);
-            System.out.println("Автомобиль заправлен " + refuelVolume + " литр" + getEndingForRefueling(refuelVolume) + " топлива.");
+            System.out.println("РђРІС‚РѕРјРѕР±РёР»СЊ Р·Р°РїСЂР°РІР»РµРЅ " + refuelVolume + " Р»РёС‚СЂ" + getEndingForRefueling(refuelVolume) + " С‚РѕРїР»РёРІР°.");
         } catch (NoFreeVolumeInFuelTankExeption e) {
             System.out.println(e.getMessage());
         }
@@ -98,7 +98,7 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public void showCurrentTraveledDistance() {
-        System.out.println("Расстояние последней поездки: " + getTraveledDistance() +  " км.");
+        System.out.println("Р Р°СЃСЃС‚РѕСЏРЅРёРµ РїРѕСЃР»РµРґРЅРµР№ РїРѕРµР·РґРєРё: " + getTraveledDistance() +  " РєРј.");
     }
 
     public int getTraveledDistance() {
@@ -111,7 +111,7 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public void showTotalTraveledDistance() {
-        System.out.println("Общий пробег автомобиля: " + getTotalTraveledDistance() +  " км.");
+        System.out.println("РћР±С‰РёР№ РїСЂРѕР±РµРі Р°РІС‚РѕРјРѕР±РёР»СЏ: " + getTotalTraveledDistance() +  " РєРј.");
     }
 
     public int getTotalTraveledDistance() {

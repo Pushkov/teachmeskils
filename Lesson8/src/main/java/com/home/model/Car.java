@@ -1,6 +1,5 @@
 package com.home.model;
 
-import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -18,10 +17,10 @@ public class Car {
     private int maxSpeed;
     private int currentSpeed;
 
-    @Setter(AccessLevel.NONE)
-    private Engine engine;
-    @Setter(AccessLevel.NONE)
-    private FuelTank fuelTank;
+//    @Setter(AccessLevel.NONE)
+    private final Engine engine;
+//    @Setter(AccessLevel.NONE)
+    private final FuelTank fuelTank;
 
     public Car(Engine engine, FuelTank fuelTank) {
         this.engine = engine;

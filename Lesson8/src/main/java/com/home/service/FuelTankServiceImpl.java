@@ -39,8 +39,8 @@ public class FuelTankServiceImpl implements FuelTankService {
         int emptyVolume = getCapacity() - getFuelLevel();
         int resultRefuelVolume;
         if (fuelVolume > emptyVolume) {
-            throw new NoFreeVolumeInFuelTankExeption("Вы хотите залить " + fuelVolume + " литр" + getEnding(fuelVolume) + " топлива,"
-                    + " а свободного объема только " + emptyVolume + " литр" + getEnding(emptyVolume));
+            throw new NoFreeVolumeInFuelTankExeption("Р’С‹ С…РѕС‚РёС‚Рµ Р·Р°Р»РёС‚СЊ " + fuelVolume + " Р»РёС‚СЂ" + getEnding(fuelVolume) + " С‚РѕРїР»РёРІР°,"
+                    + " Р° СЃРІРѕР±РѕРґРЅРѕРіРѕ РѕР±СЉРµРјР° С‚РѕР»СЊРєРѕ " + emptyVolume + " Р»РёС‚СЂ" + getEnding(emptyVolume));
         } else {
             fuelTank.setFuelLevel(getFuelLevel() + fuelVolume);
             resultRefuelVolume = fuelVolume;

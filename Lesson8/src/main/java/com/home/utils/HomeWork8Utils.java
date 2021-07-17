@@ -3,11 +3,11 @@ package com.home.utils;
 public class HomeWork8Utils {
 
     public static String getEndingForRefueling(int count) {
-        String ending = "àìè";
+        String ending = "Ğ°Ğ¼Ğ¸";
         if(count == 0){
-            ending = "îâ";
+            ending = "Ğ¾Ğ²";
         } else if(count == 1){
-            ending = "îì";
+            ending = "Ğ¾Ğ¼";
         }
         return ending;
     }
@@ -17,10 +17,10 @@ public class HomeWork8Utils {
         int count100 = count % 100;
         String ending = "";
         if (count10 >= 2) {
-            ending = "à";
+            ending = "Ğ°";
         }
         if (count10 >= 5 || count10 == 0 || (count100 >= 11 & count100 <= 14)) {
-            ending = "îâ";
+            ending = "Ğ¾Ğ²";
         }
         return ending;
     }
