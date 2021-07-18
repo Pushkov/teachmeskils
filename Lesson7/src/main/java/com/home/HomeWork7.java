@@ -8,10 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HomeWork7 {
-    private static List<Transport> transportList;
+    private static List<Transport> transportList = initListOfTransport();
 
     public static void main(String[] args) {
-        transportList = initListOfTransport();
         TransportSelectorService transportSelectorService = new TransportSelectorService();
         for (Transport t : transportList) {
             System.out.println();
