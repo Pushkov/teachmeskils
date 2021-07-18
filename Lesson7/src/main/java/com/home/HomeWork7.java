@@ -15,9 +15,13 @@ public class HomeWork7 {
         for (Transport t : transportList) {
             System.out.println();
             TransportService service = transportSelectorService.createService(t);
-            System.out.println(t);
-            service.basicAction();
-            service.advancedAction();
+            if (service != null) {
+                System.out.println(t.info());
+                service.basicAction();
+                service.advancedAction();
+            } else {
+                System.out.println("Транспортное средсво отсутсвует в нашем каталоге");
+            }
         }
     }
 
@@ -26,7 +30,7 @@ public class HomeWork7 {
         transportList.add(CivilAirTransport.builder()
                 .model("Airbus")
                 .mass(10000)
-                .power(10000)
+                .power(10000d)
                 .maximalSpeed(1100)
                 .airstripMinSize(2000)
                 .wingSize(24)
@@ -36,7 +40,7 @@ public class HomeWork7 {
         transportList.add(MilitaryAirTransport.builder()
                 .model("MIG")
                 .mass(8000)
-                .power(8200)
+                .power(8200d)
                 .maximalSpeed(1900)
                 .airstripMinSize(1500)
                 .wingSize(18)
@@ -46,7 +50,7 @@ public class HomeWork7 {
         transportList.add(PassengerGroundTransport.builder()
                 .model("Audi")
                 .mass(1700)
-                .power(150)
+                .power(150d)
                 .maximalSpeed(200)
                 .wheelCount(4)
                 .fuelConsumption(8)
@@ -56,7 +60,7 @@ public class HomeWork7 {
         transportList.add(FreightGroundTransport.builder()
                 .model("Scania")
                 .mass(8000)
-                .power(450)
+                .power(450d)
                 .maximalSpeed(110)
                 .wheelCount(6)
                 .fuelConsumption(20)

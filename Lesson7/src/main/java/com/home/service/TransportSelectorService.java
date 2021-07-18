@@ -5,14 +5,19 @@ import com.home.model.*;
 public class TransportSelectorService {
     public TransportService createService(Transport transport) {
         TransportService service = null;
-        if (transport instanceof PassengerGroundTransport) {
-            service = new PassengersGroundTransportServiceImpl((PassengerGroundTransport) transport);
-        } else if (transport instanceof FreightGroundTransport) {
-            service = new FreightGroundTransportServiceImpl((FreightGroundTransport) transport);
-        } else if (transport instanceof CivilAirTransport) {
-            service = new CivilAirTransportServiceImpl((CivilAirTransport) transport);
-        } else if (transport instanceof MilitaryAirTransport) {
-            service = new MilitaryAirTransportServiceImpl((MilitaryAirTransport) transport);
+        switch (transport.getType()) {
+            case CIVIL:
+                service = new CivilAirTransportServiceImpl((CivilAirTransport) transport);
+                break;
+            case MILITARY:
+                service = new MilitaryAirTransportServiceImpl((MilitaryAirTransport) transport);
+                break;
+            case FREIGHT:
+                service = new FreightGroundTransportServiceImpl((FreightGroundTransport) transport);
+                break;
+            case PASSENGER:
+                service = new PassengersGroundTransportServiceImpl((PassengerGroundTransport) transport);
+                break;
         }
         return service;
     }

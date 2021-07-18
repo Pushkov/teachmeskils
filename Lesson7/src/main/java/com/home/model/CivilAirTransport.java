@@ -1,10 +1,11 @@
 package com.home.model;
 
+import com.home.enums.TransportType;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
-import static com.home.util.CalculationsUtils.powerToHP;
+import static com.home.enums.TransportType.CIVIL;
 
 @Getter
 @Setter
@@ -14,16 +15,16 @@ public class CivilAirTransport extends AirTransport {
     private boolean isBusinessClassAvailable;
 
     @Override
-    public String toString() {
+    public TransportType getType() {
+        return CIVIL;
+    }
+
+    @Override
+    public String info() {
         return "CivilAirTransport{" +
-                "model='" + getModel() + "', " +
-                "power=" + getPower() + "kW (" + powerToHP(getPower()) + " hp), " +
-                "mass=" + getMass() + "кг, " +
-                "maximalSpeed=" + getMaximalSpeed() + "км/ч, " +
-                "airstripMinSize=" + getAirstripMinSize() + "м, " +
-                "wingSize=" + getWingSize() + "м, " +
-                "passengersCount=" + getPassengersCount() + ", " +
-                "isBusinessClassAvailable=" + isBusinessClassAvailable() +
+                super.info() +
+                ", passengersCount=" + getPassengersCount() +
+                ", isBusinessClassAvailable=" + isBusinessClassAvailable() +
                 "}";
     }
 }

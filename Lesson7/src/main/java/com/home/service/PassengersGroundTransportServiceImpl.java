@@ -37,6 +37,6 @@ public class PassengersGroundTransportServiceImpl implements TransportService {
     }
 
     private double getFuelConsumption(double movingTime) {
-        return movingTime * passengerGroundTransport.getMaximalSpeed() * passengerGroundTransport.getFuelConsumption();
+        return movingTime * passengerGroundTransport.getMaximalSpeed() * passengerGroundTransport.getFuelConsumption() / 100;
     }
 }

@@ -1,10 +1,11 @@
 package com.home.model;
 
+import com.home.enums.TransportType;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
-import static com.home.util.CalculationsUtils.powerToHP;
+import static com.home.enums.TransportType.FREIGHT;
 
 @Getter
 @Setter
@@ -13,15 +14,15 @@ public class FreightGroundTransport extends GroundTransport {
     private Integer carrying;
 
     @Override
-    public String toString() {
+    public TransportType getType() {
+        return FREIGHT;
+    }
+
+    @Override
+    public String info() {
         return "FreightGroundTransport{" +
-                "model='" + getModel() + "', " +
-                "power=" + getPower() + "kW (" + powerToHP(getPower()) + " hp), " +
-                "mass=" + getMass() + "кг, " +
-                "maximalSpeed=" + getMaximalSpeed() + "км/ч, " +
-                "wheelCount=" + getWheelCount() + ", " +
-                "fuelConsumption=" + getFuelConsumption() + "л/км, " +
-                "carrying=" + getCarrying() + "кг , " +
-                "}";
+                super.info() +
+                ", carrying=" + carrying +
+                '}';
     }
 }

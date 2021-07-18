@@ -7,11 +7,14 @@ import lombok.experimental.SuperBuilder;
 @Getter
 @Setter
 @SuperBuilder
-public class AirTransport extends Transport {
+public abstract class AirTransport extends Transport {
     private Integer airstripMinSize;
     private Integer wingSize;
 
-    public void info() {
-        System.out.println("airTransport");
+    public String info() {
+        return super.info() +
+                ", airstripMinSize=" + airstripMinSize +
+                ", wingSize=" + wingSize;
     }
+
 }

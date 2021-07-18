@@ -7,7 +7,14 @@ import lombok.experimental.SuperBuilder;
 @Getter
 @Setter
 @SuperBuilder
-public class GroundTransport extends Transport {
+public abstract class GroundTransport extends Transport {
     private Integer wheelCount;
     private Integer fuelConsumption;
+
+    @Override
+    public String info() {
+        return super.info() +
+                ", wheelCount=" + wheelCount +
+                ", fuelConsumption=" + fuelConsumption;
+    }
 }

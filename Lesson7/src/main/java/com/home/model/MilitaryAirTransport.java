@@ -1,10 +1,11 @@
 package com.home.model;
 
+import com.home.enums.TransportType;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
-import static com.home.util.CalculationsUtils.powerToHP;
+import static com.home.enums.TransportType.MILITARY;
 
 @Getter
 @Setter
@@ -14,17 +15,16 @@ public class MilitaryAirTransport extends AirTransport {
     private boolean isCatapultAvailable;
 
     @Override
-    public String toString() {
-        return "MilitaryAirTransport{" +
-                "model='" + getModel() + "', " +
-                "power=" + getPower() + "kW (" + powerToHP(getPower()) + " hp), " +
-                "mass=" + getMass() + "кг, " +
-                "maximalSpeed=" + getMaximalSpeed() + "км/ч, " +
-                "airstripMinSize=" + getAirstripMinSize() + "м, " +
-                "wingSize=" + getWingSize() + "м, " +
-                "rocketCount=" + getRocketCount() + ", " +
-                "isCatapultAvailable=" + isCatapultAvailable() +
-                "}";
+    public TransportType getType() {
+        return MILITARY;
     }
 
+    @Override
+    public String info() {
+        return "MilitaryAirTransport{" +
+                super.info() +
+                ", rocketCount=" + getRocketCount() +
+                ", isCatapultAvailable=" + isCatapultAvailable() +
+                "}";
+    }
 }
