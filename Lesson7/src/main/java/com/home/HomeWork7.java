@@ -15,13 +15,9 @@ public class HomeWork7 {
         for (Transport t : transportList) {
             System.out.println();
             TransportService service = transportSelectorService.createService(t);
-            if (service != null) {
-                System.out.println(t.info());
-                service.basicAction();
-                service.advancedAction();
-            } else {
-                System.out.println("Транспортное средсво отсутсвует в нашем каталоге");
-            }
+            System.out.println(t.info());
+            service.basicAction();
+            service.advancedAction();
         }
     }
 

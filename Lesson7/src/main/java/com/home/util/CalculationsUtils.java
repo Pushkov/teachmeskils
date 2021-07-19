@@ -19,12 +19,12 @@ public class CalculationsUtils {
                 scanner.next();
             }
             number = scanner.nextDouble();
-            isPositiveNumber = checkNumberIsPositive(number);
+            isPositiveNumber = checkNumberIsNonPositive(number);
         } while (isPositiveNumber);
         return number;
     }
 
-    private static boolean checkNumberIsPositive(double number) {
+    private static boolean checkNumberIsNonPositive(double number) {
         boolean isPositiveNumber = true;
         if (number > 0) {
             isPositiveNumber = false;
