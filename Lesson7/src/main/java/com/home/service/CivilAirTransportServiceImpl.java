@@ -13,7 +13,7 @@ public class CivilAirTransportServiceImpl implements TransportService {
 
     @Override
     public void basicAction() {
-        int countPassengers = (int) Math.ceil(readDataFromConsole("Введите число пассажиров"));
+        int countPassengers = (int) readDataFromConsole("Введите число пассажиров");
         if (countPassengers > civilAirTransport.getPassengersCount()) {
             System.out.println("Вам нужен самолет побольше");
         } else {
@@ -23,7 +23,7 @@ public class CivilAirTransportServiceImpl implements TransportService {
 
     @Override
     public void advancedAction() {
-        int airstripLength = (int) Math.ceil(readDataFromConsole("Введите длину взлетно-посадочной полосы аэродрома"));
+        double airstripLength = readDataFromConsole("Введите длину взлетно-посадочной полосы аэродрома");
         if (airstripLength > civilAirTransport.getAirstripMinSize()) {
             System.out.println("Вам нужен другой аэродром");
         } else {

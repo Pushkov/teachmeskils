@@ -11,7 +11,6 @@ public class CalculationsUtils {
     public static double readDataFromConsole(String message) {
         Scanner scanner = new Scanner(System.in);
         double number;
-        boolean isPositiveNumber = true;
         do {
             System.out.println(message + ":");
             while (!scanner.hasNextDouble()) {
@@ -19,18 +18,14 @@ public class CalculationsUtils {
                 scanner.next();
             }
             number = scanner.nextDouble();
-            isPositiveNumber = checkNumberIsNonPositive(number);
-        } while (isPositiveNumber);
+        } while (isNonPositiveNumber(number));
         return number;
     }
 
-    private static boolean checkNumberIsNonPositive(double number) {
-        boolean isPositiveNumber = true;
-        if (number > 0) {
-            isPositiveNumber = false;
-        } else {
+    private static boolean isNonPositiveNumber(double number) {
+        if (number < 0) {
             System.out.println("Введенное не является ПОЛОЖИТЕЛЬНЫМ числом.");
         }
-        return isPositiveNumber;
+        return number <= 0;
     }
 }
