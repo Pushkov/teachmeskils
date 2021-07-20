@@ -4,9 +4,9 @@ public class HomeWork8Utils {
 
     public static String getEndingForRefueling(int count) {
         String ending = "ами";
-        if(count == 0){
+        if (count == 0) {
             ending = "ов";
-        } else if(count == 1){
+        } else if (count == 1) {
             ending = "ом";
         }
         return ending;
