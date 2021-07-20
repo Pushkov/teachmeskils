@@ -50,8 +50,8 @@ public class HomeWork8 {
         carService.showTotalTraveledDistance();
     }
 
-    private static Car initCar(){
-        Car car = new Car(new Engine("diesel",2000),new FuelTank(64));
+    private static Car initCar() {
+        Car car = new Car(new Engine("diesel", 2000), new FuelTank(64));
         car.setModel("Mazda");
         car.setColor("Red");
         car.setYearOfIssue(1991);

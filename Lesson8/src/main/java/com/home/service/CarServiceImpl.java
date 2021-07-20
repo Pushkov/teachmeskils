@@ -1,6 +1,6 @@
 package com.home.service;
 
-import com.home.exeptions.NoFreeVolumeInFuelTankExeption;
+import com.home.exсeptions.NoFreeVolumeInFuelTankException;
 import com.home.model.Car;
 
 import static com.home.utils.HomeWork8Utils.getEndingForRefueling;
@@ -91,7 +91,7 @@ public class CarServiceImpl implements CarService {
         try {
             int refuelVolume = fuelTankService.refuel(fuelVolume);
             System.out.println("Автомобиль заправлен " + refuelVolume + " литр" + getEndingForRefueling(refuelVolume) + " топлива.");
-        } catch (NoFreeVolumeInFuelTankExeption e) {
+        } catch (NoFreeVolumeInFuelTankException e) {
             System.out.println(e.getMessage());
         }
     }
