@@ -21,6 +21,8 @@
         <module>Lesson8</module>
    </modules>
 
+    </modules>
+
     <dependencies>
         <dependency>
             <groupId>org.projectlombok</groupId>
