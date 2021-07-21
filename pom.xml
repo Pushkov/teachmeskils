@@ -21,6 +21,7 @@
         <module>Lesson8</module>
         <module>Lesson9</module>
         <module>Lesson9_wear</module>
+        <module>Lesson9_handler</module>
     </modules>
 
     <dependencies>
