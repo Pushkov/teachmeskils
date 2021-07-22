@@ -17,23 +17,14 @@ import com.home.service.people.IWomanService;
 import com.home.service.people.WomanServiceImpl;
 import com.home.service.thing.CupboardServiceImpl;
 import com.home.service.thing.ICupboardService;
-import com.home.util.HomeWork9WearUtils;
 
 import java.util.List;
 
 import static com.home.enums.WearColors.*;
-import static com.home.util.HomeWork9WearUtils.getOtherRandomItem;
 
-public class HomeWork9_wear {
+public class HomeWork9_3 {
 
     public static void main(String[] args) {
-        System.out.println("***************");
-        for (int i = 0; i < 8 ; i++) {
-            getOtherRandomItem(RED);
-        }
-        System.out.println("***************");
-
-
         Cupboard cupboard = new Cupboard();
         ICupboardService cupboardService = new CupboardServiceImpl(cupboard);
 

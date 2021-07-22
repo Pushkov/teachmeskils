@@ -6,8 +6,8 @@ public class HomeWork9WearUtils {
     private static final SecureRandom RANDOM = new SecureRandom();
 
     public static <T extends Enum> T getRandomEnumItem(Class<T> clazz) {
-        int x = RANDOM.nextInt(clazz.getEnumConstants().length);
-        return clazz.getEnumConstants()[x];
+        int randomIndex = RANDOM.nextInt(clazz.getEnumConstants().length);
+        return clazz.getEnumConstants()[randomIndex];
     }
 
 //    public static <T extends Enum> T getOtherRandomItem(T item) {
