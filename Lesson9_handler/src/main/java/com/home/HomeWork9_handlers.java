@@ -1,8 +1,11 @@
 package com.home;
 
 import com.home.interfaces.IHuman;
+import com.home.interfaces.IWear;
 import com.home.model.*;
 import com.home.service.HumanService;
+
+import java.util.List;
 
 import static com.home.enums.WearType.JACKET;
 
@@ -10,10 +13,9 @@ public class HomeWork9_handlers {
     public static void main(String[] args) {
         Human human = new Human("Vik");
         IHuman humanService = new HumanService(human);
-        humanService.takeWear(new Hat());
-        humanService.takeWear(new Jacket());
-        humanService.takeWear(new Pants());
-        humanService.takeWear(new Shoes());
+        for (IWear wear : getIWearList()) {
+            humanService.takeWear(wear);
+        }
 
         System.out.println("Вариант с последовательным вызовом");
         humanService.wearPutOn();
@@ -28,5 +30,13 @@ public class HomeWork9_handlers {
         System.out.println();
         humanService.wearTakeOffWears();
 
+    }
+
+    private static List<IWear> getIWearList() {
+        return List.of(
+                new Hat(),
+                new Jacket(),
+                new Pants(),
+                new Shoes());
     }
 }
