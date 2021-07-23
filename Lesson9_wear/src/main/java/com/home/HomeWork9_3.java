@@ -37,7 +37,7 @@ public class HomeWork9_3 {
         IWomanService womanService = new WomanServiceImpl(woman);
         int count = 0;
         while (!womanService.isWomanPleased() && cupboardService.getWearsCountInCupboard() > 0) {
-            womanService.takeItem(cupboardService.getItem());
+            womanService.takeItem(cupboardService.extractItem());
             System.out.println(womanService.dressingInfo());
             count++;
         }

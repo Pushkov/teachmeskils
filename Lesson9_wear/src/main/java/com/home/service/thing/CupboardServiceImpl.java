@@ -32,7 +32,7 @@ public class CupboardServiceImpl implements ICupboardService {
     }
 
     @Override
-    public IWear getItem() {
+    public IWear extractItem() {
         IWear resultWear = null;
         List<IWear> wears = this.cupboard.getWears();
         if (wears.size() > 0) {
@@ -43,7 +43,7 @@ public class CupboardServiceImpl implements ICupboardService {
     }
 
     @Override
-    public IWear findItemByWearType(WearType type) {
+    public IWear extractItemByWearType(WearType type) {
         IWear resultWear = null;
         List<IWear> wears = this.cupboard.getWears()
                 .stream()
