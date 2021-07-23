@@ -11,14 +11,14 @@ public class HomeWork9WearUtils {
         return enumConstatnts[randomIndex];
     }
 
-//    public static <T extends Enum> T getOtherRandomItem(T item) {
-//        T resultItem;
-//        do {
-//            resultItem = getRandomEnumItem( item.getClass().);
-//            System.out.println("> " + resultItem);
-//        } while (resultItem == item);
-//        return resultItem;
-//    }
+    public static <T extends Enum> T getOtherRandomItem(T item) {
+        T resultItem;
+        do {
+            resultItem = (T) getRandomEnumItem(item.getClass());
+            System.out.println("> " + resultItem);
+        } while (resultItem == item);
+        return resultItem;
+    }
 
     public static boolean getRandomBoolean() {
         return RANDOM.nextBoolean();
