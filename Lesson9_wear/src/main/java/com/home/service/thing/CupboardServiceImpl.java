@@ -56,8 +56,15 @@ public class CupboardServiceImpl implements ICupboardService {
         return resultWear;
     }
 
+    @Override
+    public void removeAllWears() {
+        this.cupboard.getWears().clear();
+    }
+
     private IWear getRandomWear(List<IWear> wears) {
         int index = getRandomInt(wears.size());
         return wears.get(index);
     }
+
+
 }

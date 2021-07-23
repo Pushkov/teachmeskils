@@ -16,4 +16,6 @@ public interface ICupboardService {
     IWear extractItem();
 
     IWear extractItemByWearType(WearType type);
+
+    void removeAllWears();
 }
