@@ -2,9 +2,7 @@ package com.home.model.wear.dress;
 
 import com.home.enums.DressType;
 import com.home.enums.WearColors;
-import lombok.EqualsAndHashCode;
 
-@EqualsAndHashCode
 public class SimpleDress implements IDress {
     private final WearColors color;
 

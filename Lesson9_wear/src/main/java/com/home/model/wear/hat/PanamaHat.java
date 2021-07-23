@@ -2,11 +2,9 @@ package com.home.model.wear.hat;
 
 import com.home.enums.HatType;
 import com.home.enums.WearColors;
-import lombok.EqualsAndHashCode;
 
 import static com.home.enums.HatType.PANAMA;
 
-@EqualsAndHashCode
 public class PanamaHat implements IHat {
     private final WearColors color;
 

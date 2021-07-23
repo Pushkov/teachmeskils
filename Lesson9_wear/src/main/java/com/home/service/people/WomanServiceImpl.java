@@ -6,19 +6,13 @@ import com.home.model.wear.dress.IDress;
 import com.home.model.wear.hat.IHat;
 import com.home.model.wear.reticule.IReticule;
 import com.home.model.wear.shoes.IShoes;
+import lombok.AllArgsConstructor;
 
 import static com.home.util.HomeWork9WearUtils.getRandomBoolean;
 
+@AllArgsConstructor
 public class WomanServiceImpl implements IWomanService {
     private final Woman woman;
-
-    public WomanServiceImpl(Woman woman) {
-        this.woman = woman;
-    }
-
-    private boolean isCaprice() {
-        return getRandomBoolean();
-    }
 
     @Override
     public void takeItem(IWear item) {
@@ -46,19 +40,8 @@ public class WomanServiceImpl implements IWomanService {
         }
     }
 
-    @Override
-    public void putOn(IWear item) {
-
-    }
-
-    @Override
-    public void takeOff(IWear item) {
-
-    }
-
-    @Override
-    public IWear refuseDress(IWear item) {
-        return null;
+    private boolean isCaprice() {
+        return getRandomBoolean();
     }
 
     @Override

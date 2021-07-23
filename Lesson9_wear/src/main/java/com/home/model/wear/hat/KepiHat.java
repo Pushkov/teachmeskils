@@ -2,11 +2,9 @@ package com.home.model.wear.hat;
 
 import com.home.enums.HatType;
 import com.home.enums.WearColors;
-import lombok.EqualsAndHashCode;
 
 import static com.home.enums.HatType.KEPI;
 
-@EqualsAndHashCode
 public class KepiHat implements IHat {
     private final WearColors color;
 

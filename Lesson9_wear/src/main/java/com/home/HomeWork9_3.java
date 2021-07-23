@@ -43,7 +43,7 @@ public class HomeWork9_3 {
         }
         if (womanService.isWomanPleased()) {
             System.out.println("Женщина " + woman.getName() + " оделась за " + count + " минут.");
-            System.out.println("В шкау осталось " + cupboardService.getWearsCountInCupboard() + " вещей.");
+            System.out.println("В шкафу осталось " + cupboardService.getWearsCountInCupboard() + " вещей.");
         } else {
             System.out.println("В шкафу закончились вещи");
         }
