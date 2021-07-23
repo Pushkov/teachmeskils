@@ -2,9 +2,11 @@ package com.home.model.wear.shoes;
 
 import com.home.enums.ShoesType;
 import com.home.enums.WearColors;
+import lombok.EqualsAndHashCode;
 
 import static com.home.enums.ShoesType.COMFORTABLE;
 
+@EqualsAndHashCode
 public class ComfortableShoes implements IShoes {
     private final WearColors color;
 
