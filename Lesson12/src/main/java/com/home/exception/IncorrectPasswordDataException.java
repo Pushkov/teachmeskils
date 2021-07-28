@@ -1,6 +1,7 @@
 package com.home.exception;
 
 public class IncorrectPasswordDataException extends WrongPasswordException {
+
     public IncorrectPasswordDataException() {
         super();
     }
@@ -8,6 +9,4 @@ public class IncorrectPasswordDataException extends WrongPasswordException {
     public IncorrectPasswordDataException(String message) {
         super(message);
     }
-
-
 }

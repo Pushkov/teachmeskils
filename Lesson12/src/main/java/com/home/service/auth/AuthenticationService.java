@@ -1,6 +1,7 @@
 package com.home.service.auth;
 
 public interface AuthenticationService {
+
     void login();
 
     void clearCredentials();
@@ -8,5 +9,4 @@ public interface AuthenticationService {
     boolean isConnected();
 
     String getUserLogin();
-
 }

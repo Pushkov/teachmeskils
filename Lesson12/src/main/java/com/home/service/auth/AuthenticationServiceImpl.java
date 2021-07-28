@@ -34,7 +34,6 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         }
     }
 
-
     private String getLogin() {
         String login = getStringFromConsole(Constants.Banners.LOGIN);
         if (!login.matches(PATTERN_LOGIN)) {
