@@ -8,9 +8,9 @@ public class Constants {
     }
 
     public class Validation {
-        public static final int LOGIN_LENGTH = 2;
-        public static final String PATTERN_LOGIN = "[^_]\\w{" + LOGIN_LENGTH + ",}";
-        public static final int PASSWORD_LENGTH = 2;
-        public static final String PATTERN_PASSWORD = "\\w{" + PASSWORD_LENGTH + ",}";
+        public static final int LOGIN_LENGTH = 20;
+        public static final String PATTERN_LOGIN = "[^_]\\w{" + (LOGIN_LENGTH - 1) + ",}";
+        public static final int PASSWORD_LENGTH = 20;
+        public static final String PATTERN_PASSWORD = "\\w{" + (PASSWORD_LENGTH - 1) + ",}";
     }
 }

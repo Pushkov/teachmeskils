@@ -29,6 +29,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
             System.out.println(e.getMessage() + e.getCause().getMessage());
         } catch (WrongLoginException e) {
             System.out.println(e.getMessage());
+        } finally {
+            System.out.println("************************************************************************");
         }
     }
 
