@@ -1,12 +1,9 @@
 package com.home.service.auth;
 
+import com.home.exception.WrongLoginException;
+import com.home.exception.WrongPasswordException;
+
 public interface AuthenticationService {
 
-    void login();
-
-    void clearCredentials();
-
-    boolean isConnected();
-
-    String getUserLogin();
+    boolean checkAuthorization(String login, String password, String confirmPassword) throws WrongLoginException, WrongPasswordException;
 }

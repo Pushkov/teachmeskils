@@ -1,6 +1,6 @@
 package com.home.exception;
 
-public class WrongLoginException extends RuntimeException {
+public class WrongLoginException extends Exception {
 
     public WrongLoginException() {
         super();

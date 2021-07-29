@@ -1,16 +1,11 @@
 package com.home.util;
 
-public class Constants {
-    public class Banners {
-        public static final String LOGIN = "########################\n#    Введите логин     #\n########################\n> ";
-        public static final String PASSWORD = "########################\n#    Введите пароль    #\n########################\n> ";
-        public static final String CONFIRM_PASSWORD = "########################\n#  Подтвердите пароль  #\n########################\n> ";
-    }
+import lombok.experimental.UtilityClass;
 
-    public class Validation {
-        public static final int LOGIN_LENGTH = 20;
-        public static final String PATTERN_LOGIN = "[^_]\\w{" + (LOGIN_LENGTH - 1) + ",}";
-        public static final int PASSWORD_LENGTH = 20;
-        public static final String PATTERN_PASSWORD = "\\w{" + (PASSWORD_LENGTH - 1) + ",}";
-    }
+@UtilityClass
+public class Constants {
+        public static final int LOGIN_LENGTH = 3;
+        public static final String PATTERN_LOGIN = "[^\\W_]\\w{" + (LOGIN_LENGTH - 1) + ",}";
+        public static final int PASSWORD_LENGTH = 3;
+        public static final String PATTERN_PASSWORD = "\\w{" + PASSWORD_LENGTH + ",}";
 }
