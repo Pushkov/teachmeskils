@@ -1,6 +1,6 @@
 package com.home.exception;
 
-public class WrongPasswordException extends RuntimeException {
+public class WrongPasswordException extends Exception {
 
     public WrongPasswordException(String message) {
         super(message);
@@ -8,9 +8,5 @@ public class WrongPasswordException extends RuntimeException {
 
     public WrongPasswordException() {
         super();
-    }
-
-    public WrongPasswordException(String message, Throwable cause) {
-        super(message, cause);
     }
 }
