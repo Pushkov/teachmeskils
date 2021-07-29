@@ -23,6 +23,7 @@
         <module>Lesson9_wear</module>
         <module>Lesson9_handler</module>
         <module>MyLessons</module>
+        <module>Lesson13</module>
     </modules>
 
     <dependencies>
