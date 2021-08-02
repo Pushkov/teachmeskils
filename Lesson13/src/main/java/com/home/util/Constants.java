@@ -2,6 +2,9 @@ package com.home.util;
 
 public class Constants {
 
+    public static final int MIN_SIZE = 3;
+    public static final int MAX_SIZE = 5;
+
     public static final String SMALL_TEXT = "Когда я был шалаш маленький, я думал: вот  бы попасть в такую страну," +
             " чтобы ни птицы, ни казак звери меня не боялись.";
     public static final String TEXT =
