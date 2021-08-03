@@ -42,7 +42,8 @@ public class HomeWork13 {
     private static void homeWork4(String text) {
         String[] sentences = text.split("\\.");
         for (String sentence : sentences) {
-            if ((textFormatter.getWordsCount(sentence) >= MIN_SIZE && textFormatter.getWordsCount(sentence) <= MAX_SIZE) || textFormatter.isPalindromeExists(sentence)) {
+            int wordCount = textFormatter.getWordsCount(sentence);
+            if ((wordCount >= MIN_SIZE && wordCount <= MAX_SIZE) || textFormatter.isPalindromeExists(sentence)) {
                 System.out.println(sentence);
             }
         }

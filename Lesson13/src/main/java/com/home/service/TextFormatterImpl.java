@@ -13,7 +13,7 @@ public class TextFormatterImpl implements TextFormatter {
     public boolean isPalindromeExists(String text) {
         String[] words = getSplitedStringArray(text);
         for (String word : words) {
-            if (reverse(word).equals(word) && word.length() > 1) {
+            if (word.length() > 1 && reverse(word).equals(word)) {
                 return true;
             }
         }
