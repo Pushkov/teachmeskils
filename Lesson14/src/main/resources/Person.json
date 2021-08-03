@@ -1,0 +1,22 @@
+[
+  {
+    "address": {
+      "country": "Blr",
+      "city": "Vtb"
+    },
+    "age": 20,
+    "name": "Nik",
+    "surname": "Safronov",
+    "sex": "male"
+  },
+  {
+    "address": {
+      "country": "Blr",
+      "city": "Minsk"
+    },
+    "age": 25,
+    "name": "Pol",
+    "surname": "Safronov",
+    "sex": "male"
+  }
+]
