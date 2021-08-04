@@ -3,6 +3,7 @@ package com.home;
 import com.home.service.TextFormatterImpl;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 
 import static com.home.util.Constants.MAX_SIZE;
@@ -43,11 +44,13 @@ public class HomeWork14 {
     public static void main(String[] args) {
         textFormatter = new TextFormatterImpl();
 //        point1();
-        point2();
+//        point2();
+        point3();
+
     }
 
     public static void point1() {
-        System.out.println("1)");
+        System.out.println("1) Копирование слов палиндромов вновый файл");
         try {
             List<String> stringList = textFormatter.getFileByStringLines("/hw1/input.txt");
             textFormatter.createFile("/hw1/output.txt");
@@ -56,13 +59,13 @@ public class HomeWork14 {
                     textFormatter.addToFile(word + "\n", "/hw1/output.txt");
                 }
             }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
         }
     }
 
     public static void point2() {
-        System.out.println("2)");
+        System.out.println("2) Раздление текста на предложения.\nСортировка предложений по числу слов и наличию слов-палиндромов");
         try {
             String text = textFormatter.getFileByString("/hw2/input.txt");
             String[] sentences = textFormatter.getSplitedSentences(text);
@@ -76,5 +79,25 @@ public class HomeWork14 {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void point3() {
+        System.out.println("3) Цензура");
+
+        try {
+            textFormatter.analyzeText("/hw2/input.txt");
+//            textFormatter.analyzeText("/hw3/sourceText.txt");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public static void point4() {
+        System.out.println("4) Сериализация объекта");
+    }
+
+    public static void point5() {
+        System.out.println("5) Сериализация объекта и вывод в формате JSON");
     }
 }
