@@ -2,6 +2,9 @@ package com.home;
 
 import com.home.service.TextFormatterImpl;
 
+import java.io.FileNotFoundException;
+import java.util.List;
+
 public class HomeWork14 {
     /**
      * 1)В исходном файле hw1/input.txt находятся слова, каждое слово на новой строке.
@@ -32,8 +35,46 @@ public class HomeWork14 {
      * в через maven в проект. Далее вычитать данные в json формате из файла (hw5/car.json), руками файл изменять нельзя!
      * Преобразовать прочитанные данные в объект hw5.Car (название полей редактировать нельзя, добавлять поля также нельзя) и вывести на консоль объект через System.out.println();
      */
+    static TextFormatterImpl textFormatter;
+
     public static void main(String[] args) {
-        TextFormatterImpl textFormatter = new TextFormatterImpl();
-        textFormatter.getStringFromFile("input.txt");
+        textFormatter = new TextFormatterImpl();
+//        point1();
+        point2();
     }
+
+    public static void point1() {
+        System.out.println("1)");
+        try {
+            List<String> stringList = textFormatter.getFileByStringLines("/hw1/input.txt");
+            textFormatter.createFile("/hw1/output.txt");
+            for (String word : stringList) {
+                if (textFormatter.isPalindrome(word)) {
+                    textFormatter.addToFile(word + "\n", "/hw1/output.txt");
+                }
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void point2() {
+        System.out.println("2)");
+        try {
+            String text = textFormatter.getFileByString("/hw2/input.txt");
+            String[] sentences = textFormatter.getSplitedSentences(text);
+            for (String sentence : sentences) {
+//                int wordCount = textFormatter.getWordsCount(sentence);
+//                if ((wordCount >= MIN_SIZE && wordCount <= MAX_SIZE) || textFormatter.isPalindromeExists(sentence)) {
+                System.out.println(sentence);
+//                }
+            }
+            System.out.println("*");
+            System.out.println(text);
+            System.out.println("*");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
