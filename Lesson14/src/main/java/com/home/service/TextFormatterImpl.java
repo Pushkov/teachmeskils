@@ -102,11 +102,10 @@ public class TextFormatterImpl implements TextFormatter {
     }
 
     public String[] getSplitedSentences(String text) {
-//        String[] arr = text.replaceAll("-$", "").split("[.!?]");
-        String[] arr = text.replaceAll("\\s{2,}", "").split("[.!?]");
-//        for (int i = 0; i < arr.length ; i++) {
-//            arr[i] = arr[i];
-//        }
+        String[] arr = text.replaceAll("-[\\n\\r]", "").replaceAll("\\s{2,}", "").split("[.!?]");
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = arr[i].trim();
+        }
         return arr;
     }
 

@@ -5,6 +5,9 @@ import com.home.service.TextFormatterImpl;
 import java.io.FileNotFoundException;
 import java.util.List;
 
+import static com.home.util.Constants.MAX_SIZE;
+import static com.home.util.Constants.MIN_SIZE;
+
 public class HomeWork14 {
     /**
      * 1)В исходном файле hw1/input.txt находятся слова, каждое слово на новой строке.
@@ -63,18 +66,15 @@ public class HomeWork14 {
         try {
             String text = textFormatter.getFileByString("/hw2/input.txt");
             String[] sentences = textFormatter.getSplitedSentences(text);
+            textFormatter.createFile("/hw2/output.txt");
             for (String sentence : sentences) {
-//                int wordCount = textFormatter.getWordsCount(sentence);
-//                if ((wordCount >= MIN_SIZE && wordCount <= MAX_SIZE) || textFormatter.isPalindromeExists(sentence)) {
-                System.out.println(sentence);
-//                }
+                int wordCount = textFormatter.getWordsCount(sentence);
+                if ((wordCount >= MIN_SIZE && wordCount <= MAX_SIZE) || textFormatter.isPalindromeExists(sentence)) {
+                    textFormatter.addToFile(sentence + "\n", "/hw2/output.txt");
+                }
             }
-            System.out.println("*");
-            System.out.println(text);
-            System.out.println("*");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
     }
-
 }
