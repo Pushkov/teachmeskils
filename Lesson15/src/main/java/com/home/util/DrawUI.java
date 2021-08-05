@@ -1,5 +1,7 @@
 package com.home.util;
 
+import com.home.form.GoodForm;
+
 public class DrawUI {
 
     public static void drawStartMenu() {
@@ -32,5 +34,29 @@ public class DrawUI {
         System.out.println("************************************************************");
     }
 
+    public static void drawSelectIdGoodMenu() {
+        System.out.println("************************************************************");
+        System.out.println("*                   Задайте ID товара                      *");
+        System.out.println("************************************************************");
+    }
 
+    public static void drawEditGoodMenu(GoodForm form) {
+        System.out.println("************************************************************");
+        System.out.println("*          Измените параметры существующего товара         *");
+        System.out.println("*>     ID           : " + form.getId() + ";");
+        System.out.println("*>     Наименование : " + form.getName() + ";");
+        System.out.println("*>     Цена         : " + form.getPrice() + ";");
+        System.out.println("************************************************************");
+    }
+
+    public static void drawDeleteGoodMenu(GoodForm form) {
+        System.out.println("************************************************************");
+        System.out.println("*                  Вы хотите удалить товар?                *");
+        System.out.println("*>     ID           : " + form.getId() + ";");
+        System.out.println("*>     Наименование : " + form.getName() + ";");
+        System.out.println("*>     Цена         : " + form.getPrice() + ";");
+        System.out.println("************************************************************");
+        System.out.println("1 - Удалить");
+        System.out.println("2 - Назад, в главное меню");
+    }
 }

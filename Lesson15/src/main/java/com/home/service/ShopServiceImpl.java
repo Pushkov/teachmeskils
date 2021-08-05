@@ -1,5 +1,6 @@
 package com.home.service;
 
+import com.home.exception.GoodAlreadyExistException;
 import com.home.model.Good;
 import com.home.model.Shop;
 
@@ -23,27 +24,35 @@ public class ShopServiceImpl implements ShopService {
     @Override
     public Good getGoodById(int id) {
         return findById(id)
-                .orElseThrow(() -> new NoSuchElementException("No Good with id = " + id + " found !!!"));
+                .orElseThrow(() -> new NoSuchElementException("Товар с ID = " + id + " не найден."));
     }
 
     @Override
-    public void takeGood(Good good) {
+    public void takeGood(Good good) throws GoodAlreadyExistException {
         if (!isGoodExists(good)) {
             shop.getGoods().add(good);
         } else {
-            throw new RuntimeException("такой товар есть");
+            throw new GoodAlreadyExistException("Товар с ID = " + good.getId() + " уже есть в магазине.");
         }
     }
 
     @Override
-    public void editGood(Good good) {
-
+    public void editGood(int id, Good good) throws GoodAlreadyExistException {
+        if (!isGoodExists(good)) {
+            Good sourceGood = findById(id)
+                    .orElseThrow(() -> new NoSuchElementException("Товар с ID = " + id + " не найден."));
+            List<Good> goods = shop.getGoods();
+            int index = goods.indexOf(sourceGood);
+            goods.set(index, good);
+        } else {
+            throw new GoodAlreadyExistException("Товар с ID = " + good.getId() + " уже есть в магазине.");
+        }
     }
 
     @Override
     public void removeGood(int id) {
         Good good = findById(id)
-                .orElseThrow(() -> new NoSuchElementException("No Good with id = " + id + " found !!!"));
+                .orElseThrow(() -> new NoSuchElementException("Товар с ID = " + id + " не найден."));
         shop.getGoods().remove(good);
     }
 

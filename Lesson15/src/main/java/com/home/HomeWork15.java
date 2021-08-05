@@ -1,25 +1,30 @@
 package com.home;
 
+import com.home.exception.GoodAlreadyExistException;
 import com.home.model.Good;
 import com.home.model.Shop;
 import com.home.service.ShopService;
 import com.home.service.ShopServiceImpl;
-import com.home.service.ShopUIService;
+import com.home.service.ShopUIServiceImpl;
 import com.home.util.InputUtils;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 
+@Slf4j
 public class HomeWork15 {
     private static ShopService shopService;
 
     public static void main(String[] args) {
         Shop shop = new Shop();
         shopService = new ShopServiceImpl(shop);
-        ShopUIService ui = new ShopUIService(shopService);
+        ShopUIServiceImpl ui = new ShopUIServiceImpl(shopService);
         init();
         while (shopService.isWorking()) {
-            ui.startPage();
-            InputUtils.waitEnterKey();
+            ui.openShop();
+            if (shopService.isWorking()) {
+                InputUtils.waitEnterKeyPressed();
+            }
         }
         System.out.println("Магазин закрыт!!!");
     }
@@ -33,7 +38,11 @@ public class HomeWork15 {
                 Good.builder().id(5).name("Торт").price(60).build()
         );
         for (Good good : list) {
-            shopService.takeGood(good);
+            try {
+                shopService.takeGood(good);
+            } catch (GoodAlreadyExistException e) {
+                log.error(e.getMessage());
+            }
         }
     }
 }

@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class InputUtils {
 
-    public static int readDataFromConsole(String message, int bound) {
+    public static int readIntFromConsole(String message, int bound) {
         Scanner scanner = new Scanner(System.in);
         int number;
         do {
@@ -18,18 +18,23 @@ public class InputUtils {
         return number;
     }
 
+    public static String readStringFromConsole(String message) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println(message);
+        return scanner.nextLine();
+    }
+
     private static boolean isNotInBounds(int number, int bound) {
         if (number < 1 || number > bound) {
-            System.out.println("Введенное не связано с пунктами меню.");
+            System.out.println("Введенное не является положительным числом.");
         }
         return number < 1 || number > bound;
     }
 
-    public static String waitEnterKey() {
+    public static void waitEnterKeyPressed() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("*** Нажмите ENTER клавишу для продолжения ***");
+        System.out.println("*** Нажмите клавишу ENTER для продолжения ***");
         scanner.nextLine();
-        return "";
     }
 
 }

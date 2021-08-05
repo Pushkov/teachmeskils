@@ -1,5 +1,6 @@
 package com.home.service;
 
+import com.home.exception.GoodAlreadyExistException;
 import com.home.model.Good;
 
 import java.util.List;
@@ -9,9 +10,9 @@ public interface ShopService {
 
     Good getGoodById(int id);
 
-    void takeGood(Good good);
+    void takeGood(Good good) throws GoodAlreadyExistException;
 
-    void editGood(Good good);
+    void editGood(int id, Good good) throws GoodAlreadyExistException;
 
     void removeGood(int id);
 
