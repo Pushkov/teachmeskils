@@ -12,9 +12,7 @@ public class Constants {
     public static final String OUTPUT_FILE_2 = RESOURCE_DIR + "/hw2/output.txt";
     public static final String INPUT_FILE_3_TEXT = RESOURCE_DIR + "/hw3/sourceText.txt";
     public static final String INPUT_FILE_3_WORDS = RESOURCE_DIR + "/hw3/words.txt";
-    public static final String INPUT_FILE_4 = RESOURCE_DIR + "/hw4/input.txt";
-    public static final String OUTPUT_FILE_4 = RESOURCE_DIR + "/hw4/output.txt";
-    public static final String INPUT_FILE_5 = RESOURCE_DIR + "/hw5/input.txt";
-    public static final String OUTPUT_FILE_5 = RESOURCE_DIR + "/hw5/output.txt";
+    public static final String FILE_4 = RESOURCE_DIR + "/hw4/serialize.dat";
+    public static final String FILE_5 = RESOURCE_DIR + "/hw5/car.json";
 
 }

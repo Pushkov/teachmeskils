@@ -1,5 +1,10 @@
 package com.home;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.home.model.Car;
+import com.home.model.Engine;
+import com.home.model.FuelTank;
+import com.home.model.SimpleCar;
 import com.home.service.TextFormatter;
 import com.home.service.TextFormatterImpl;
 import lombok.extern.slf4j.Slf4j;
@@ -11,6 +16,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import static com.home.service.ObjectSerializer.fromFile;
+import static com.home.service.ObjectSerializer.toFile;
 import static com.home.util.Constants.*;
 
 @Slf4j
@@ -49,9 +56,11 @@ public class HomeWork14 {
 
     public static void main(String[] args) {
         textFormatter = new TextFormatterImpl();
-        point1();
-        point2();
-        point3();
+//        point1(); //Копирование слов-палиндромов в новый файл
+//        point2(); //Раздление текста на предложения. Сортировка предложений по числу слов и наличию слов-палиндромов
+//        point3(); //Цензура
+//        point4(); //Сериализация - десериализация
+        point5(); //JSON
     }
 
     public static void point1() {
@@ -142,9 +151,32 @@ public class HomeWork14 {
 
     public static void point4() {
         System.out.println("4) Сериализация объекта");
+        FuelTank tank = new FuelTank(65);
+        tank.setFuelLevel(35);
+        Engine engine = new Engine(2000, "diesel");
+        SimpleCar carMazda = new SimpleCar("Mazda", engine);
+        carMazda.setMaxSpeed(200);
+        carMazda.setFuelTank(tank);
+        carMazda.setPrice(10000);
+        System.out.println("Исходный объект: " + carMazda);
+
+        try {
+            toFile(carMazda, FILE_4);
+            fromFile(FILE_4);
+        } catch (IOException | ClassNotFoundException e) {
+            log.error(e.getMessage());
+        }
     }
 
     public static void point5() {
-        System.out.println("5) Сериализация объекта и вывод в формате JSON");
+        System.out.println("5) Работа с JSON");
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            String stringJSON = textFormatter.readFileAsString(FILE_5);
+            Car myMappingClass = objectMapper.readValue(stringJSON, Car.class);
+            System.out.println(myMappingClass);
+        } catch (IOException e) {
+            log.error(e.getMessage());
+        }
     }
 }

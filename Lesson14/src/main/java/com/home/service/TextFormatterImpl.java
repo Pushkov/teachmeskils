@@ -32,6 +32,10 @@ public class TextFormatterImpl implements TextFormatter {
         return getProcessedString(stringBuilder.toString());
     }
 
+    private String getProcessedString(String text) {
+        return text.replaceAll("-*\r\n", "");
+    }
+
     @Override
     public void createFile(String path) throws IOException {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(path))) {
@@ -48,20 +52,20 @@ public class TextFormatterImpl implements TextFormatter {
     }
 
     @Override
-    public boolean isPalindrome(String word) {
-        String reverseWord = new StringBuilder(word).reverse().toString();
-        if (word.length() > 1 && word.matches("[a-zA-Zа-яА-Я]+") && word.equalsIgnoreCase(reverseWord)) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
     public boolean isPalindromeExists(String text) {
         for (String word : text.split(" ")) {
             if (isPalindrome(word)) {
                 return true;
             }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean isPalindrome(String word) {
+        String reverseWord = new StringBuilder(word).reverse().toString();
+        if (word.length() > 1 && word.matches("[a-zA-Zа-яА-Я]+") && word.equalsIgnoreCase(reverseWord)) {
+            return true;
         }
         return false;
     }
@@ -73,22 +77,6 @@ public class TextFormatterImpl implements TextFormatter {
                 .map(String::trim)
                 .collect(Collectors.toList());
     }
-
-    private String getProcessedString(String text) {
-        return text.replaceAll("-*\r\n", "");
-    }
-
-
-//    public List<String> getSplitedStringArray2(String text) {
-//        List<String> stringList = new ArrayList<>();
-//        BreakIterator iterator = BreakIterator.getSentenceInstance();
-//        iterator.setText(text);
-//        int start = iterator.first();
-//        for (int end = iterator.next(); end != BreakIterator.DONE ; start = end, end = iterator.next()) {
-//            stringList.add(text.substring(start,end));
-//        }
-//        return stringList;
-//    }
 
     @Override
     public int getWordsCount(String text) {
