@@ -1,15 +1,21 @@
 package com.home;
 
+import com.home.service.TextFormatter;
 import com.home.service.TextFormatterImpl;
+import lombok.extern.slf4j.Slf4j;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
-import static com.home.util.Constants.MAX_SIZE;
-import static com.home.util.Constants.MIN_SIZE;
+import static com.home.util.Constants.*;
 
+@Slf4j
 public class HomeWork14 {
+
     /**
      * 1)В исходном файле hw1/input.txt находятся слова, каждое слово на новой строке.
      * После запуска программы должен создать файл output.txt, который будет содержать в себе только палиндромы.
@@ -39,58 +45,99 @@ public class HomeWork14 {
      * в через maven в проект. Далее вычитать данные в json формате из файла (hw5/car.json), руками файл изменять нельзя!
      * Преобразовать прочитанные данные в объект hw5.Car (название полей редактировать нельзя, добавлять поля также нельзя) и вывести на консоль объект через System.out.println();
      */
-    static TextFormatterImpl textFormatter;
+    static TextFormatter textFormatter;
 
     public static void main(String[] args) {
         textFormatter = new TextFormatterImpl();
-//        point1();
-//        point2();
+        point1();
+        point2();
         point3();
-
     }
 
     public static void point1() {
-        System.out.println("1) Копирование слов палиндромов вновый файл");
+        System.out.println("1) Копирование слов-палиндромов в новый файл - \"resources/hw1/output.txt\"");
         try {
-            List<String> stringList = textFormatter.getFileByStringLines("/hw1/input.txt");
-            textFormatter.createFile("/hw1/output.txt");
+            List<String> stringList = textFormatter.readFileAsStringList(INPUT_FILE_1);
+            textFormatter.createFile(OUTPUT_FILE_1);
             for (String word : stringList) {
                 if (textFormatter.isPalindrome(word)) {
-                    textFormatter.addToFile(word + "\n", "/hw1/output.txt");
+                    textFormatter.addToFile(word + "\n", OUTPUT_FILE_1);
                 }
             }
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            log.error(e.getMessage());
         }
     }
 
     public static void point2() {
-        System.out.println("2) Раздление текста на предложения.\nСортировка предложений по числу слов и наличию слов-палиндромов");
+        System.out.println("2) Раздление текста на предложения. \nСортировка предложений по числу слов и наличию слов-палиндромов \nрезультат - \"resources/hw2/output.txt\"");
         try {
-            String text = textFormatter.getFileByString("/hw2/input.txt");
-            String[] sentences = textFormatter.getSplitedSentences(text);
-            textFormatter.createFile("/hw2/output.txt");
+            String text = textFormatter.readFileAsString(INPUT_FILE_2);
+            List<String> sentences = textFormatter.getSplitedSentences(text);
+            textFormatter.createFile(OUTPUT_FILE_2);
             for (String sentence : sentences) {
                 int wordCount = textFormatter.getWordsCount(sentence);
                 if ((wordCount >= MIN_SIZE && wordCount <= MAX_SIZE) || textFormatter.isPalindromeExists(sentence)) {
-                    textFormatter.addToFile(sentence + "\n", "/hw2/output.txt");
+                    textFormatter.addToFile(sentence + "\n", OUTPUT_FILE_2);
                 }
             }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+        } catch (IOException e) {
+            log.error(e.getMessage());
         }
     }
 
     public static void point3() {
         System.out.println("3) Цензура");
-
         try {
-            textFormatter.analyzeText("/hw2/input.txt");
-//            textFormatter.analyzeText("/hw3/sourceText.txt");
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            String text = textFormatter.readFileAsString(INPUT_FILE_3_TEXT);
+            List<String> words = textFormatter.readFileAsStringList(INPUT_FILE_3_WORDS);
+            List<String> matchingWords = getMatchingWordsList(words, text);
+            if (matchingWords.size() > 0) {
+                analyzeAndShowSentencesForEditing(text, matchingWords);
+            } else {
+                System.out.println("Текст цензуру прошел");
+            }
+        } catch (IOException e) {
+            log.error(e.getMessage());
         }
+    }
 
+    private static void analyzeAndShowSentencesForEditing(String text, List<String> matchingWords) {
+        List<String> sentences = textFormatter.getSplitedSentences(text);
+        Set<String> sentencesForEditing = getSentencesForEditing(matchingWords, sentences);
+        printSentencesForEditing(sentencesForEditing);
+    }
+
+    private static List<String> getMatchingWordsList(List<String> words, String text) {
+        String textLowerCase = text.toLowerCase();
+        List<String> matchingWords = new ArrayList<>();
+        for (String word : words) {
+            if (textLowerCase.contains(word.toLowerCase())) {
+                matchingWords.add(word);
+            }
+        }
+        return matchingWords;
+    }
+
+    private static Set<String> getSentencesForEditing(List<String> matchingWords, List<String> sentences) {
+        Set<String> sentencesForEditing = new HashSet<>();
+        for (String word : matchingWords) {
+            sentencesForEditing.addAll(getSentencesForEditingByWord(sentences, word));
+        }
+        return sentencesForEditing;
+    }
+
+    private static Set<String> getSentencesForEditingByWord(List<String> sentences, String word) {
+        return sentences.stream()
+                .filter(x -> x.toLowerCase().contains(word.toLowerCase()))
+                .collect(Collectors.toSet());
+    }
+
+    private static void printSentencesForEditing(Set<String> sentences) {
+        System.out.println("Предложения содержащие запрещенные слова:");
+        for (String s : sentences) {
+            System.out.println("  " + s);
+        }
     }
 
     public static void point4() {

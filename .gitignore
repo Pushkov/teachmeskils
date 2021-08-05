@@ -27,3 +27,5 @@ hs_err_pid*
 /java-tms.iml
 *.iml
 /Lesson9_wear/target/
+/Lesson14/src/main/resources/hw1/output.txt
+/Lesson14/src/main/resources/hw2/output.txt

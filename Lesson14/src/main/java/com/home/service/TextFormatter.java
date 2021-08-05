@@ -5,18 +5,20 @@ import java.util.List;
 
 public interface TextFormatter {
 
-    List<String> getFileByStringLines(String path) throws IOException;
+    List<String> readFileAsStringList(String path) throws IOException;
 
-    String getFileByString(String path) throws IOException;
+    String readFileAsString(String path) throws IOException;
 
-    void createFile(String path);
+    void createFile(String path) throws IOException;
 
-    void addToFile(String text, String path);
+    void addToFile(String text, String path) throws IOException;
 
     boolean isPalindrome(String word);
 
     boolean isPalindromeExists(String text);
 
-    String[] getSplitedSentences(String text);
+    List<String> getSplitedSentences(String text);
+
+    int getWordsCount(String text);
 
 }
