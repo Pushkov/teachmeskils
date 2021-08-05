@@ -5,16 +5,15 @@ import com.home.model.Car;
 import com.home.model.Engine;
 import com.home.model.FuelTank;
 import com.home.model.SimpleCar;
+import com.home.service.SentenceAnalyzer;
+import com.home.service.SentenceAnalyzerImpl;
 import com.home.service.TextFormatter;
 import com.home.service.TextFormatterImpl;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import static com.home.service.ObjectSerializer.fromFile;
 import static com.home.service.ObjectSerializer.toFile;
@@ -53,13 +52,14 @@ public class HomeWork14 {
      * Преобразовать прочитанные данные в объект hw5.Car (название полей редактировать нельзя, добавлять поля также нельзя) и вывести на консоль объект через System.out.println();
      */
     static TextFormatter textFormatter;
+    static SentenceAnalyzer sentenceAnalyzer;
 
     public static void main(String[] args) {
         textFormatter = new TextFormatterImpl();
-//        point1(); //Копирование слов-палиндромов в новый файл
-//        point2(); //Раздление текста на предложения. Сортировка предложений по числу слов и наличию слов-палиндромов
-//        point3(); //Цензура
-//        point4(); //Сериализация - десериализация
+        point1(); //Копирование слов-палиндромов в новый файл
+        point2(); //Раздление текста на предложения. Сортировка предложений по числу слов и наличию слов-палиндромов
+        point3(); //Цензура
+        point4(); //Сериализация - десериализация
         point5(); //JSON
     }
 
@@ -97,49 +97,20 @@ public class HomeWork14 {
 
     public static void point3() {
         System.out.println("3) Цензура");
+        sentenceAnalyzer = new SentenceAnalyzerImpl(textFormatter);
         try {
             String text = textFormatter.readFileAsString(INPUT_FILE_3_TEXT);
             List<String> words = textFormatter.readFileAsStringList(INPUT_FILE_3_WORDS);
-            List<String> matchingWords = getMatchingWordsList(words, text);
+            List<String> matchingWords = sentenceAnalyzer.getMatchingWordsList(words, text);
             if (matchingWords.size() > 0) {
-                analyzeAndShowSentencesForEditing(text, matchingWords);
+                Set<String> sentencesForEditing = sentenceAnalyzer.getSentencesForEditing(text, matchingWords);
+                printSentencesForEditing(sentencesForEditing);
             } else {
                 System.out.println("Текст цензуру прошел");
             }
         } catch (IOException e) {
             log.error(e.getMessage());
         }
-    }
-
-    private static void analyzeAndShowSentencesForEditing(String text, List<String> matchingWords) {
-        List<String> sentences = textFormatter.getSplitedSentences(text);
-        Set<String> sentencesForEditing = getSentencesForEditing(matchingWords, sentences);
-        printSentencesForEditing(sentencesForEditing);
-    }
-
-    private static List<String> getMatchingWordsList(List<String> words, String text) {
-        String textLowerCase = text.toLowerCase();
-        List<String> matchingWords = new ArrayList<>();
-        for (String word : words) {
-            if (textLowerCase.contains(word.toLowerCase())) {
-                matchingWords.add(word);
-            }
-        }
-        return matchingWords;
-    }
-
-    private static Set<String> getSentencesForEditing(List<String> matchingWords, List<String> sentences) {
-        Set<String> sentencesForEditing = new HashSet<>();
-        for (String word : matchingWords) {
-            sentencesForEditing.addAll(getSentencesForEditingByWord(sentences, word));
-        }
-        return sentencesForEditing;
-    }
-
-    private static Set<String> getSentencesForEditingByWord(List<String> sentences, String word) {
-        return sentences.stream()
-                .filter(x -> x.toLowerCase().contains(word.toLowerCase()))
-                .collect(Collectors.toSet());
     }
 
     private static void printSentencesForEditing(Set<String> sentences) {
