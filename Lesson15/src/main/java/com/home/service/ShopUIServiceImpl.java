@@ -5,6 +5,7 @@ import com.home.form.GoodForm;
 import com.home.model.Good;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
@@ -158,8 +159,9 @@ public class ShopUIServiceImpl implements ShopUIService {
     }
 
     private List<Good> sortListByAdd(List<Good> list) {
-        reverse(list);
-        return list;
+        List<Good> reverseList = new ArrayList<>(list);
+        reverse(reverseList);
+        return reverseList;
     }
 
     private void printGoodsList(List<Good> goodList, String sortBy) {
