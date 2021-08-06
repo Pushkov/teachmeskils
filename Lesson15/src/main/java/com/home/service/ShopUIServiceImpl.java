@@ -57,21 +57,22 @@ public class ShopUIServiceImpl implements ShopUIService {
         drawSortingGoodsMenu();
         int bound = 6;
         int menuPoint = readIntFromConsole("Введите число от 1 до " + bound, bound);
+        List<Good> allGoods = service.getAllGoods();
         switch (menuPoint) {
             case 1:
-                printGoodsList(sortListById(service.getAllGoods()));
+                printGoodsList(sortListById(allGoods));
                 break;
             case 2:
-                printGoodsList(sortListByName(service.getAllGoods()));
+                printGoodsList(sortListByName(allGoods));
                 break;
             case 3:
-                printGoodsList(sortListByPriceAsс(service.getAllGoods()));
+                printGoodsList(sortListByPriceAsс(allGoods));
                 break;
             case 4:
-                printGoodsList(sortListByPriceDesс(service.getAllGoods()));
+                printGoodsList(sortListByPriceDesс(allGoods));
                 break;
             case 5:
-                printGoodsList(sortListByAdd(service.getAllGoods()));
+                printGoodsList(sortListByAdd(allGoods));
                 break;
             case 6:
                 startPage();
@@ -81,12 +82,8 @@ public class ShopUIServiceImpl implements ShopUIService {
 
     private void addGoodPage() {
         drawAddGoodMenu();
-        GoodForm form = GoodForm.builder()
-                .id(readIntFromConsole("Задайте Id товара", Integer.MAX_VALUE))
-                .name(readStringFromConsole("Задайте наименование товара"))
-                .price(readIntFromConsole("Задайте цену товара", Integer.MAX_VALUE))
-                .build();
         try {
+            GoodForm form = createGoodForm();
             service.takeGood(toGood(form));
             System.out.println("*** Товар добавлен");
         } catch (GoodAlreadyExistException e) {
@@ -102,11 +99,7 @@ public class ShopUIServiceImpl implements ShopUIService {
         try {
             Good good = service.getGoodById(selectId);
             drawEditGoodMenu(fromGood(good));
-            GoodForm form = GoodForm.builder()
-                    .id(readIntFromConsole("Задайте Id товара", Integer.MAX_VALUE))
-                    .name(readStringFromConsole("Задайте наименование товара"))
-                    .price(readIntFromConsole("Задайте цену товара", Integer.MAX_VALUE))
-                    .build();
+            GoodForm form = createGoodForm();
             service.editGood(good.getId(), toGood(form));
             System.out.println("*** Товар изменен");
         } catch (NoSuchElementException | GoodAlreadyExistException e) {
@@ -138,6 +131,14 @@ public class ShopUIServiceImpl implements ShopUIService {
 //            log.error(e.getMessage());
             startPage();
         }
+    }
+
+    private GoodForm createGoodForm() {
+        return GoodForm.builder()
+                .id(readIntFromConsole("Задайте Id товара", Integer.MAX_VALUE))
+                .name(readStringFromConsole("Задайте наименование товара"))
+                .price(readIntFromConsole("Задайте цену товара", Integer.MAX_VALUE))
+                .build();
     }
 
     private List<Good> sortListByName(List<Good> list) {
