@@ -60,19 +60,19 @@ public class ShopUIServiceImpl implements ShopUIService {
         List<Good> allGoods = service.getAllGoods();
         switch (menuPoint) {
             case 1:
-                printGoodsList(sortListById(allGoods));
+                printGoodsList(sortListById(allGoods), "ID");
                 break;
             case 2:
-                printGoodsList(sortListByName(allGoods));
+                printGoodsList(sortListByName(allGoods), "Наименование");
                 break;
             case 3:
-                printGoodsList(sortListByPriceAsс(allGoods));
+                printGoodsList(sortListByPriceAsс(allGoods), "Цена по-возрастанию");
                 break;
             case 4:
-                printGoodsList(sortListByPriceDesс(allGoods));
+                printGoodsList(sortListByPriceDesс(allGoods), "Цена по-убыванию");
                 break;
             case 5:
-                printGoodsList(sortListByAdd(allGoods));
+                printGoodsList(sortListByAdd(allGoods), "По порядку добавления");
                 break;
             case 6:
                 startPage();
@@ -162,10 +162,8 @@ public class ShopUIServiceImpl implements ShopUIService {
         return list;
     }
 
-    private void printGoodsList(List<Good> goodList) {
-        System.out.println("***** Список товара в магазине");
-        for (Good good : goodList) {
-            System.out.println(good);
-        }
+    private void printGoodsList(List<Good> goodList, String sortBy) {
+        System.out.printf("***** Список товара в магазине (сортировано по полю: %s).\n", sortBy);
+        goodList.forEach(System.out::println);
     }
 }
