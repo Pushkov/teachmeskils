@@ -5,7 +5,6 @@ import com.home.form.GoodForm;
 import com.home.model.Good;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.Comparator;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
@@ -15,6 +14,8 @@ import static com.home.form.GoodForm.toGood;
 import static com.home.util.DrawUI.*;
 import static com.home.util.InputUtils.readIntFromConsole;
 import static com.home.util.InputUtils.readStringFromConsole;
+import static java.util.Collections.reverse;
+import static java.util.Comparator.comparing;
 
 @Slf4j
 public class ShopUIServiceImpl implements ShopUIService {
@@ -54,7 +55,7 @@ public class ShopUIServiceImpl implements ShopUIService {
 
     private void sortingPage() {
         drawSortingGoodsMenu();
-        int bound = 4;
+        int bound = 6;
         int menuPoint = readIntFromConsole("Введите число от 1 до " + bound, bound);
         switch (menuPoint) {
             case 1:
@@ -64,9 +65,15 @@ public class ShopUIServiceImpl implements ShopUIService {
                 printGoodsList(sortListByName(service.getAllGoods()));
                 break;
             case 3:
-                printGoodsList(sortListByPrice(service.getAllGoods()));
+                printGoodsList(sortListByPriceAsс(service.getAllGoods()));
                 break;
             case 4:
+                printGoodsList(sortListByPriceDesс(service.getAllGoods()));
+                break;
+            case 5:
+                printGoodsList(sortListByAdd(service.getAllGoods()));
+                break;
+            case 6:
                 startPage();
                 break;
         }
@@ -134,15 +141,24 @@ public class ShopUIServiceImpl implements ShopUIService {
     }
 
     private List<Good> sortListByName(List<Good> list) {
-        return list.stream().sorted(Comparator.comparing(a -> a.getName().toUpperCase())).collect(Collectors.toList());
+        return list.stream().sorted(comparing(a -> a.getName().toUpperCase())).collect(Collectors.toList());
     }
 
     private List<Good> sortListById(List<Good> list) {
-        return list.stream().sorted(Comparator.comparing(Good::getId)).collect(Collectors.toList());
+        return list.stream().sorted(comparing(Good::getId)).collect(Collectors.toList());
     }
 
-    private List<Good> sortListByPrice(List<Good> list) {
-        return list.stream().sorted(Comparator.comparing(Good::getPrice)).collect(Collectors.toList());
+    private List<Good> sortListByPriceAsс(List<Good> list) {
+        return list.stream().sorted(comparing(Good::getPrice)).collect(Collectors.toList());
+    }
+
+    private List<Good> sortListByPriceDesс(List<Good> list) {
+        return list.stream().sorted(comparing(Good::getPrice).reversed()).collect(Collectors.toList());
+    }
+
+    private List<Good> sortListByAdd(List<Good> list) {
+        reverse(list);
+        return list;
     }
 
     private void printGoodsList(List<Good> goodList) {

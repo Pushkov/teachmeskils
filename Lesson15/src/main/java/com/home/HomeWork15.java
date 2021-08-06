@@ -5,6 +5,7 @@ import com.home.model.Good;
 import com.home.model.Shop;
 import com.home.service.ShopService;
 import com.home.service.ShopServiceImpl;
+import com.home.service.ShopUIService;
 import com.home.service.ShopUIServiceImpl;
 import com.home.util.InputUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -18,7 +19,7 @@ public class HomeWork15 {
     public static void main(String[] args) {
         Shop shop = new Shop();
         shopService = new ShopServiceImpl(shop);
-        ShopUIServiceImpl ui = new ShopUIServiceImpl(shopService);
+        ShopUIService ui = new ShopUIServiceImpl(shopService);
         init();
         while (shopService.isWorking()) {
             ui.openShop();
@@ -32,10 +33,10 @@ public class HomeWork15 {
     private static void init() {
         List<Good> list = List.of(
                 Good.builder().id(1).name("Хлеб").price(10).build(),
-                Good.builder().id(2).name("Масло").price(20).build(),
                 Good.builder().id(3).name("Молоко").price(15).build(),
-                Good.builder().id(4).name("Творог").price(30).build(),
-                Good.builder().id(5).name("Торт").price(60).build()
+                Good.builder().id(2).name("Масло").price(20).build(),
+                Good.builder().id(5).name("Торт").price(60).build(),
+                Good.builder().id(4).name("Творог").price(30).build()
         );
         for (Good good : list) {
             try {

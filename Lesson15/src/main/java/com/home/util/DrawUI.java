@@ -24,8 +24,10 @@ public class DrawUI {
         System.out.println("************************************************************");
         System.out.println("1 - Id");
         System.out.println("2 - Наименование");
-        System.out.println("3 - Цена");
-        System.out.println("4 - Назад, в главное меню");
+        System.out.println("3 - Цена (по-возрастанию)");
+        System.out.println("4 - Цена (по-убыванию)");
+        System.out.println("5 - Времени добавления");
+        System.out.println("6 - Назад, в главное меню");
     }
 
     public static void drawAddGoodMenu() {
