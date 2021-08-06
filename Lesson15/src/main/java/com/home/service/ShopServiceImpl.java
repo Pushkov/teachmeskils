@@ -38,7 +38,7 @@ public class ShopServiceImpl implements ShopService {
 
     @Override
     public void editGood(int id, Good good) throws GoodAlreadyExistException {
-        if (!isGoodExists(good)) {
+        if (!isGoodExists(good) || id == good.getId()) {
             Good sourceGood = findById(id)
                     .orElseThrow(() -> new NoSuchElementException("Товар с ID = " + id + " не найден."));
             List<Good> goods = shop.getGoods();
