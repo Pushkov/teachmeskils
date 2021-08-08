@@ -1,8 +1,8 @@
 package com.home.service;
 
-import com.home.exception.GoodAlreadyExistException;
-import com.home.form.GoodForm;
-import com.home.model.Good;
+import com.home.exception.ProductAlreadyExistException;
+import com.home.form.ProductForm;
+import com.home.model.Product;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
@@ -10,8 +10,8 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
-import static com.home.form.GoodForm.fromGood;
-import static com.home.form.GoodForm.toGood;
+import static com.home.form.ProductForm.fromGood;
+import static com.home.form.ProductForm.toGood;
 import static com.home.util.DrawUI.*;
 import static com.home.util.InputUtils.readIntFromConsole;
 import static com.home.util.InputUtils.readStringFromConsole;
@@ -40,13 +40,13 @@ public class ShopUIServiceImpl implements ShopUIService {
                 sortingPage();
                 break;
             case 2:
-                addGoodPage();
+                addProductPage();
                 break;
             case 3:
-                editGoodPage();
+                editProductPage();
                 break;
             case 4:
-                deleteGoodPage();
+                deleteProductPage();
                 break;
             case 5:
                 service.closeShop();
@@ -55,25 +55,25 @@ public class ShopUIServiceImpl implements ShopUIService {
     }
 
     private void sortingPage() {
-        drawSortingGoodsMenu();
+        drawSortingProductsMenu();
         int bound = 6;
         int menuPoint = readIntFromConsole("Введите число от 1 до " + bound, bound);
-        List<Good> allGoods = service.getAllGoods();
+        List<Product> allProducts = service.getAllProducts();
         switch (menuPoint) {
             case 1:
-                printGoodsList(sortListById(allGoods), "ID");
+                printProductsList(sortListById(allProducts), "ID");
                 break;
             case 2:
-                printGoodsList(sortListByName(allGoods), "Наименование");
+                printProductsList(sortListByName(allProducts), "Наименование");
                 break;
             case 3:
-                printGoodsList(sortListByPriceAsс(allGoods), "Цена по-возрастанию");
+                printProductsList(sortListByPriceAsс(allProducts), "Цена по-возрастанию");
                 break;
             case 4:
-                printGoodsList(sortListByPriceDesс(allGoods), "Цена по-убыванию");
+                printProductsList(sortListByPriceDesс(allProducts), "Цена по-убыванию");
                 break;
             case 5:
-                printGoodsList(sortListByAdd(allGoods), "По порядку добавления");
+                printProductsList(sortListByAdd(allProducts), "По порядку добавления");
                 break;
             case 6:
                 startPage();
@@ -81,46 +81,46 @@ public class ShopUIServiceImpl implements ShopUIService {
         }
     }
 
-    private void addGoodPage() {
-        drawAddGoodMenu();
+    private void addProductPage() {
+        drawAddProductMenu();
         try {
-            GoodForm form = createGoodForm();
-            service.takeGood(toGood(form));
+            ProductForm form = createProductForm();
+            service.takeProduct(toGood(form));
             System.out.println("*** Товар добавлен");
-        } catch (GoodAlreadyExistException e) {
+        } catch (ProductAlreadyExistException e) {
             System.out.println(e.getMessage());
 //            log.error(e.getMessage());
             startPage();
         }
     }
 
-    private void editGoodPage() {
-        drawSelectIdGoodMenu();
+    private void editProductPage() {
+        drawSelectIdProductMenu();
         int selectId = readIntFromConsole("Введите Id товара", Integer.MAX_VALUE);
         try {
-            Good good = service.getGoodById(selectId);
-            drawEditGoodMenu(fromGood(good));
-            GoodForm form = createGoodForm();
-            service.editGood(good.getId(), toGood(form));
+            Product product = service.getProductById(selectId);
+            drawEditProductMenu(fromGood(product));
+            ProductForm form = createProductForm();
+            service.editProduct(product.getId(), toGood(form));
             System.out.println("*** Товар изменен");
-        } catch (NoSuchElementException | GoodAlreadyExistException e) {
+        } catch (NoSuchElementException | ProductAlreadyExistException e) {
             System.out.println(e.getMessage());
 //            log.error(e.getMessage());
             startPage();
         }
     }
 
-    private void deleteGoodPage() {
-        drawSelectIdGoodMenu();
+    private void deleteProductPage() {
+        drawSelectIdProductMenu();
         int selectId = readIntFromConsole("Введите Id товара", Integer.MAX_VALUE);
         try {
-            Good good = service.getGoodById(selectId);
-            drawDeleteGoodMenu(fromGood(good));
+            Product product = service.getProductById(selectId);
+            drawDeleteProductMenu(fromGood(product));
             int bound = 2;
             int menuPoint = readIntFromConsole("Введите число от 1 до " + bound, bound);
             switch (menuPoint) {
                 case 1:
-                    service.removeGood(good.getId());
+                    service.removeProduct(product.getId());
                     System.out.println("*** Товар удален");
                     break;
                 case 2:
@@ -134,38 +134,38 @@ public class ShopUIServiceImpl implements ShopUIService {
         }
     }
 
-    private GoodForm createGoodForm() {
-        return GoodForm.builder()
+    private ProductForm createProductForm() {
+        return ProductForm.builder()
                 .id(readIntFromConsole("Задайте Id товара", Integer.MAX_VALUE))
                 .name(readStringFromConsole("Задайте наименование товара"))
                 .price(readIntFromConsole("Задайте цену товара", Integer.MAX_VALUE))
                 .build();
     }
 
-    private List<Good> sortListByName(List<Good> list) {
+    private List<Product> sortListByName(List<Product> list) {
         return list.stream().sorted(comparing(a -> a.getName().toUpperCase())).collect(Collectors.toList());
     }
 
-    private List<Good> sortListById(List<Good> list) {
-        return list.stream().sorted(comparing(Good::getId)).collect(Collectors.toList());
+    private List<Product> sortListById(List<Product> list) {
+        return list.stream().sorted(comparing(Product::getId)).collect(Collectors.toList());
     }
 
-    private List<Good> sortListByPriceAsс(List<Good> list) {
-        return list.stream().sorted(comparing(Good::getPrice)).collect(Collectors.toList());
+    private List<Product> sortListByPriceAsс(List<Product> list) {
+        return list.stream().sorted(comparing(Product::getPrice)).collect(Collectors.toList());
     }
 
-    private List<Good> sortListByPriceDesс(List<Good> list) {
-        return list.stream().sorted(comparing(Good::getPrice).reversed()).collect(Collectors.toList());
+    private List<Product> sortListByPriceDesс(List<Product> list) {
+        return list.stream().sorted(comparing(Product::getPrice).reversed()).collect(Collectors.toList());
     }
 
-    private List<Good> sortListByAdd(List<Good> list) {
-        List<Good> reverseList = new ArrayList<>(list);
+    private List<Product> sortListByAdd(List<Product> list) {
+        List<Product> reverseList = new ArrayList<>(list);
         reverse(reverseList);
         return reverseList;
     }
 
-    private void printGoodsList(List<Good> goodList, String sortBy) {
+    private void printProductsList(List<Product> productList, String sortBy) {
         System.out.printf("***** Список товара в магазине (сортировано по полю: %s).\n", sortBy);
-        goodList.forEach(System.out::println);
+        productList.forEach(System.out::println);
     }
 }

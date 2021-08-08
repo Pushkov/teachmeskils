@@ -10,12 +10,12 @@ public class Shop {
     @Getter
     @Setter
     private boolean isWorking = true;
-    private List<Good> goods;
+    private List<Product> products;
 
-    public List<Good> getGoods() {
-        if (goods == null) {
-            goods = new ArrayList<>();
+    public List<Product> getProducts() {
+        if (products == null) {
+            products = new ArrayList<>();
         }
-        return goods;
+        return products;
     }
 }

@@ -1,20 +1,20 @@
 package com.home.service;
 
-import com.home.exception.GoodAlreadyExistException;
-import com.home.model.Good;
+import com.home.exception.ProductAlreadyExistException;
+import com.home.model.Product;
 
 import java.util.List;
 
 public interface ShopService {
-    List<Good> getAllGoods();
+    List<Product> getAllProducts();
 
-    Good getGoodById(int id);
+    Product getProductById(int id);
 
-    void takeGood(Good good) throws GoodAlreadyExistException;
+    void takeProduct(Product product) throws ProductAlreadyExistException;
 
-    void editGood(int id, Good good) throws GoodAlreadyExistException;
+    void editProduct(int id, Product product) throws ProductAlreadyExistException;
 
-    void removeGood(int id);
+    void removeProduct(int id);
 
     boolean isWorking();
 

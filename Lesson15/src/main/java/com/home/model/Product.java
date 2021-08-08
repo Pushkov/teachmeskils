@@ -7,7 +7,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Good {
+public class Product {
     private int id;
     private String name;
     private int price;

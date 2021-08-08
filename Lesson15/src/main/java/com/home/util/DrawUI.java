@@ -1,6 +1,6 @@
 package com.home.util;
 
-import com.home.form.GoodForm;
+import com.home.form.ProductForm;
 
 public class DrawUI {
 
@@ -18,7 +18,7 @@ public class DrawUI {
 
     }
 
-    public static void drawSortingGoodsMenu() {
+    public static void drawSortingProductsMenu() {
         System.out.println("************************************************************");
         System.out.println("*              Выберите параметр сортировки                *");
         System.out.println("************************************************************");
@@ -30,19 +30,19 @@ public class DrawUI {
         System.out.println("6 - Назад, в главное меню");
     }
 
-    public static void drawAddGoodMenu() {
+    public static void drawAddProductMenu() {
         System.out.println("************************************************************");
         System.out.println("*             Задайте параметры нового товара              *");
         System.out.println("************************************************************");
     }
 
-    public static void drawSelectIdGoodMenu() {
+    public static void drawSelectIdProductMenu() {
         System.out.println("************************************************************");
         System.out.println("*                   Задайте ID товара                      *");
         System.out.println("************************************************************");
     }
 
-    public static void drawEditGoodMenu(GoodForm form) {
+    public static void drawEditProductMenu(ProductForm form) {
         System.out.println("************************************************************");
         System.out.println("*          Измените параметры существующего товара         *");
         System.out.println("*>     ID           : " + form.getId() + ";");
@@ -51,7 +51,7 @@ public class DrawUI {
         System.out.println("************************************************************");
     }
 
-    public static void drawDeleteGoodMenu(GoodForm form) {
+    public static void drawDeleteProductMenu(ProductForm form) {
         System.out.println("************************************************************");
         System.out.println("*                  Вы хотите удалить товар?                *");
         System.out.println("*>     ID           : " + form.getId() + ";");

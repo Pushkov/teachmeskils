@@ -1,7 +1,7 @@
 package com.home.service;
 
-import com.home.exception.GoodAlreadyExistException;
-import com.home.model.Good;
+import com.home.exception.ProductAlreadyExistException;
+import com.home.model.Product;
 import com.home.model.Shop;
 
 import java.util.List;
@@ -17,43 +17,41 @@ public class ShopServiceImpl implements ShopService {
     }
 
     @Override
-    public List<Good> getAllGoods() {
-        return shop.getGoods();
+    public List<Product> getAllProducts() {
+        return shop.getProducts();
     }
 
     @Override
-    public Good getGoodById(int id) {
+    public Product getProductById(int id) {
         return findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Товар с ID = " + id + " не найден."));
     }
 
     @Override
-    public void takeGood(Good good) throws GoodAlreadyExistException {
-        if (!isGoodExists(good)) {
-            shop.getGoods().add(good);
+    public void takeProduct(Product product) throws ProductAlreadyExistException {
+        if (!isProductExists(product)) {
+            shop.getProducts().add(product);
         } else {
-            throw new GoodAlreadyExistException("Товар с ID = " + good.getId() + " уже есть в магазине.");
+            throw new ProductAlreadyExistException("Товар с ID = " + product.getId() + " уже есть в магазине.");
         }
     }
 
     @Override
-    public void editGood(int id, Good good) throws GoodAlreadyExistException {
-        if (!isGoodExists(good) || id == good.getId()) {
-            Good sourceGood = findById(id)
-                    .orElseThrow(() -> new NoSuchElementException("Товар с ID = " + id + " не найден."));
-            List<Good> goods = shop.getGoods();
-            int index = goods.indexOf(sourceGood);
-            goods.set(index, good);
+    public void editProduct(int id, Product product) throws ProductAlreadyExistException {
+        if (!isProductExists(product) || id == product.getId()) {
+            Product sourceProduct = getProductById(id);
+            sourceProduct.setId(product.getId());
+            sourceProduct.setName(product.getName());
+            sourceProduct.setPrice(product.getPrice());
         } else {
-            throw new GoodAlreadyExistException("Товар с ID = " + good.getId() + " уже есть в магазине.");
+            throw new ProductAlreadyExistException("Товар с ID = " + product.getId() + " уже есть в магазине.");
         }
     }
 
     @Override
-    public void removeGood(int id) {
-        Good good = findById(id)
-                .orElseThrow(() -> new NoSuchElementException("Товар с ID = " + id + " не найден."));
-        shop.getGoods().remove(good);
+    public void removeProduct(int id) {
+        Product product = getProductById(id);
+        shop.getProducts().remove(product);
     }
 
     @Override
@@ -66,13 +64,13 @@ public class ShopServiceImpl implements ShopService {
         shop.setWorking(false);
     }
 
-    private boolean isGoodExists(Good good) {
-        return shop.getGoods().stream()
-                .anyMatch(g -> g.getId() == good.getId());
+    private boolean isProductExists(Product product) {
+        return shop.getProducts().stream()
+                .anyMatch(g -> g.getId() == product.getId());
     }
 
-    private Optional<Good> findById(int id) {
-        return shop.getGoods().stream()
+    private Optional<Product> findById(int id) {
+        return shop.getProducts().stream()
                 .filter(g -> g.getId() == id)
                 .findAny();
     }

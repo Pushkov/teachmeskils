@@ -1,7 +1,7 @@
 package com.home;
 
-import com.home.exception.GoodAlreadyExistException;
-import com.home.model.Good;
+import com.home.exception.ProductAlreadyExistException;
+import com.home.model.Product;
 import com.home.model.Shop;
 import com.home.service.ShopService;
 import com.home.service.ShopServiceImpl;
@@ -31,17 +31,17 @@ public class HomeWork15 {
     }
 
     private static void init() {
-        List<Good> list = List.of(
-                Good.builder().id(1).name("Хлеб").price(10).build(),
-                Good.builder().id(3).name("Молоко").price(15).build(),
-                Good.builder().id(2).name("Масло").price(20).build(),
-                Good.builder().id(5).name("Торт").price(60).build(),
-                Good.builder().id(4).name("Творог").price(30).build()
+        List<Product> list = List.of(
+                Product.builder().id(1).name("Хлеб").price(10).build(),
+                Product.builder().id(3).name("Молоко").price(15).build(),
+                Product.builder().id(2).name("Масло").price(20).build(),
+                Product.builder().id(5).name("Торт").price(60).build(),
+                Product.builder().id(4).name("Творог").price(30).build()
         );
-        for (Good good : list) {
+        for (Product product : list) {
             try {
-                shopService.takeGood(good);
-            } catch (GoodAlreadyExistException e) {
+                shopService.takeProduct(product);
+            } catch (ProductAlreadyExistException e) {
                 log.error(e.getMessage());
             }
         }
