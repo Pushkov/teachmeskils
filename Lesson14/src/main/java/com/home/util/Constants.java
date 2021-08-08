@@ -1,6 +1,9 @@
 package com.home.util;
 
 public class Constants {
+    public static final String WORD_SEPARATOR = " ";
+    public static final String SENTENCE_SEPARATOR = "[.!?]";
+    public static final String LINE_SEPARATOR = "-*\r\n";
 
     public static final int MIN_SIZE = 3;
     public static final int MAX_SIZE = 5;

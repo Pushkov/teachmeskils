@@ -9,16 +9,15 @@ public interface TextFormatter {
 
     String readFileAsString(String path) throws IOException;
 
-    void createFile(String path) throws IOException;
+    void createOrClearFile(String path) throws IOException;
 
     void addToFile(String text, String path) throws IOException;
 
     boolean isPalindrome(String word);
 
-    boolean isPalindromeExists(String text);
+    boolean isPalindromeExists(String[] words);
 
-    List<String> getSplitedSentences(String text);
+    List<String> getSplittedSentences(String text);
 
-    int getWordsCount(String text);
-
+    String[] getSplittedWords(String text);
 }

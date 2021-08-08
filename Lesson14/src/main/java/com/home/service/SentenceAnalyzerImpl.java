@@ -1,24 +1,24 @@
 package com.home.service;
 
+import lombok.AllArgsConstructor;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import static org.apache.commons.lang3.StringUtils.containsIgnoreCase;
+
+@AllArgsConstructor
 public class SentenceAnalyzerImpl implements SentenceAnalyzer {
     private final TextFormatter textFormatter;
 
-    public SentenceAnalyzerImpl(TextFormatter textFormatter) {
-        this.textFormatter = textFormatter;
-    }
-
     @Override
     public List<String> getMatchingWordsList(List<String> words, String text) {
-        String textLowerCase = text.toLowerCase();
         List<String> matchingWords = new ArrayList<>();
         for (String word : words) {
-            if (textLowerCase.contains(word.toLowerCase())) {
+            if (containsIgnoreCase(text, word)) {
                 matchingWords.add(word);
             }
         }
@@ -27,9 +27,8 @@ public class SentenceAnalyzerImpl implements SentenceAnalyzer {
 
     @Override
     public Set<String> getSentencesForEditing(String text, List<String> matchingWords) {
-        List<String> sentences = textFormatter.getSplitedSentences(text);
+        List<String> sentences = textFormatter.getSplittedSentences(text);
         return getSentencesForEditingByWordList(matchingWords, sentences);
-
     }
 
     private Set<String> getSentencesForEditingByWordList(List<String> matchingWords, List<String> sentences) {
@@ -42,7 +41,7 @@ public class SentenceAnalyzerImpl implements SentenceAnalyzer {
 
     private Set<String> getSentencesForEditingByWord(List<String> sentences, String word) {
         return sentences.stream()
-                .filter(x -> x.toLowerCase().contains(word.toLowerCase()))
+                .filter(x -> containsIgnoreCase(x, word))
                 .collect(Collectors.toSet());
     }
 }

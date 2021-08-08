@@ -1,21 +1,21 @@
 package com.home.service;
 
-import com.home.model.SimpleCar;
+import lombok.experimental.UtilityClass;
 
 import java.io.*;
 
+@UtilityClass
 public class ObjectSerializer {
 
-    public static void toFile(SimpleCar car, String path) throws IOException {
+    public static void toFile(Object object, String path) throws IOException {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(path))) {
-            oos.writeObject(car);
+            oos.writeObject(object);
         }
     }
 
-    public static void fromFile(String path) throws IOException, ClassNotFoundException {
+    public static Object fromFile(String path) throws IOException, ClassNotFoundException {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(path))) {
-            SimpleCar p = (SimpleCar) ois.readObject();
-            System.out.println("Объект из файла: " + p.toString());
+            return ois.readObject();
         }
     }
 }

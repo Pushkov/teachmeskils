@@ -67,7 +67,7 @@ public class HomeWork14 {
         System.out.println("1) Копирование слов-палиндромов в новый файл - \"resources/hw1/output.txt\"");
         try {
             List<String> stringList = textFormatter.readFileAsStringList(INPUT_FILE_1);
-            textFormatter.createFile(OUTPUT_FILE_1);
+            textFormatter.createOrClearFile(OUTPUT_FILE_1);
             for (String word : stringList) {
                 if (textFormatter.isPalindrome(word)) {
                     textFormatter.addToFile(word + "\n", OUTPUT_FILE_1);
@@ -82,11 +82,11 @@ public class HomeWork14 {
         System.out.println("2) Раздление текста на предложения. \nСортировка предложений по числу слов и наличию слов-палиндромов \nрезультат - \"resources/hw2/output.txt\"");
         try {
             String text = textFormatter.readFileAsString(INPUT_FILE_2);
-            List<String> sentences = textFormatter.getSplitedSentences(text);
-            textFormatter.createFile(OUTPUT_FILE_2);
+            List<String> sentences = textFormatter.getSplittedSentences(text);
+            textFormatter.createOrClearFile(OUTPUT_FILE_2);
             for (String sentence : sentences) {
-                int wordCount = textFormatter.getWordsCount(sentence);
-                if ((wordCount >= MIN_SIZE && wordCount <= MAX_SIZE) || textFormatter.isPalindromeExists(sentence)) {
+                String[] words = textFormatter.getSplittedWords(sentence);
+                if ((words.length >= MIN_SIZE && words.length <= MAX_SIZE) || textFormatter.isPalindromeExists(words)) {
                     textFormatter.addToFile(sentence + "\n", OUTPUT_FILE_2);
                 }
             }
@@ -133,7 +133,8 @@ public class HomeWork14 {
 
         try {
             toFile(carMazda, FILE_4);
-            fromFile(FILE_4);
+            SimpleCar carFromFile = (SimpleCar) fromFile(FILE_4);
+            System.out.println("Объект из файла: " + carFromFile.toString());
         } catch (IOException | ClassNotFoundException e) {
             log.error(e.getMessage());
         }
