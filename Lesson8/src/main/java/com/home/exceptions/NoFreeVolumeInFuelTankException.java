@@ -1,4 +1,4 @@
-package com.home.exсeptions;
+package com.home.exceptions;
 
 public class NoFreeVolumeInFuelTankException extends RuntimeException {
     public NoFreeVolumeInFuelTankException(String message) {
