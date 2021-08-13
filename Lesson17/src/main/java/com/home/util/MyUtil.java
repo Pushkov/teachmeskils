@@ -1,6 +1,7 @@
 package com.home.util;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Random;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -17,12 +18,12 @@ public class MyUtil {
                 .collect(Collectors.toList());
     }
 
-    public static void printIntegerListPoint(Integer integer) {
-        System.out.printf("%d ", integer);
+    public static void printCollection(Collection<?> list) {
+        list.forEach(MyUtil::printWord);
     }
 
-    public static void printStringListPoint(String string) {
-        System.out.printf("%s ", string);
+    public static void printWord(Object word) {
+        System.out.print(word.toString() + " ");
     }
 
     public static Set<Integer> getSet() {
