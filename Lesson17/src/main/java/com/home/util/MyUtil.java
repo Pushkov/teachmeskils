@@ -1,9 +1,8 @@
 package com.home.util;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Random;
-import java.util.Set;
+import com.home.model.Person;
+
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -33,4 +32,17 @@ public class MyUtil {
                 .limit(10)
                 .collect(Collectors.toSet());
     }
+
+    public static List<Person> getPersonsList() {
+        return List.of(
+                new Person("Иван", "Иванов"),
+                new Person("Данила", "Данилов"),
+                new Person("Александр", "Александров"),
+                new Person("Сергей", "Сергеев"),
+                new Person("Дмитрий", "Дмитриев"),
+                new Person("Андрей", "Андреев"),
+                new Person("Антон", "Антонов")
+        );
+    }
+
 }
