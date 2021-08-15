@@ -1,6 +1,7 @@
 package com.home;
 
 import com.home.library.model.Book;
+import com.home.library.model.EmailAddress;
 import com.home.library.model.Library;
 import com.home.library.model.Reader;
 import com.home.library.service.IBookService;
@@ -12,6 +13,7 @@ import com.home.util.MyUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static com.home.library.util.LibraryUtils.print;
 import static com.home.util.MyUtil.*;
@@ -87,8 +89,6 @@ public class HomeWork17 {
     }
 
     private static void point6() {
-//        Library library = new Library();
-//        library.getBooksList().addAll(initBookList());
         LibraryManager libraryManager = new LibraryManager(new Library());
         IBookService bookService = libraryManager.getBookService();
         IReaderService readerService = libraryManager.getReaderService();
@@ -96,16 +96,24 @@ public class HomeWork17 {
         initBookList().forEach(bookService::addBookToLibrary);
         initReadersList().forEach(readerService::addReaderToLibrary);
 
-        System.out.println("1 - ");
-        printCollection(bookService.findAllBooks());
+
+        System.out.println("point a");
+        List<Book> allBooks = bookService.findAllBooks();
+        printCollection(allBooks);
+        System.out.println("\npoint b");
+        List<EmailAddress> mailingListForAll = messagingService.createMailingList("message for all", readerService.findAllReaders());
+        printCollection(mailingListForAll);
+        System.out.println("\npoint c");
+        List<Reader> readersWithManyBooks = readerService.findAllAgreeReaders().stream()
+                .filter(reader -> reader.getBookList().size() > 1)
+                .collect(Collectors.toList());
+        List<EmailAddress> mailingListForAgree = messagingService.createMailingList("for agree", readersWithManyBooks);
+        printCollection(mailingListForAgree);
+
         System.out.println("\n2 - ");
         printCollection(bookService.findAllBooksOrderByYear());
         System.out.println("\n3 - ");
         printCollection(readerService.findAllReaders());
-        System.out.println("\n4 - ");
-        printCollection(messagingService.createMailingList("for all", readerService.findAllReaders()));
-        System.out.println("\n5 - ");
-        printCollection(messagingService.createMailingList("for agree", readerService.findAllAgreeReaders()));
 
 
     }
