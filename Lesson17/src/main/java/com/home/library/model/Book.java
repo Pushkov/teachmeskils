@@ -2,9 +2,11 @@ package com.home.library.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
+@ToString
 public class Book {
     private final int id;
     private String authorName;
@@ -13,6 +15,7 @@ public class Book {
     private String name;
     private Reader owner;
     private int yearPublishing;
+    private boolean inLibrary;
 
     public Book(int id) {
         this.id = id;
@@ -26,5 +29,6 @@ public class Book {
         this.name = name;
         this.yearPublishing = yearPublishing;
         this.owner = null;
+        this.inLibrary = true;
     }
 }

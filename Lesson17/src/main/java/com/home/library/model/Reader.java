@@ -2,17 +2,19 @@ package com.home.library.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Getter
 @Setter
+@ToString
 public class Reader {
     private final long id;
     private String firstName;
     private String lastName;
-    private EmailAddress address;
+    private String email;
     private boolean agreementMailing;
     List<Book> bookList;
 
@@ -20,11 +22,11 @@ public class Reader {
         this.id = id;
     }
 
-    public Reader(long id, String firstName, String lastName, EmailAddress address, boolean agreementMailing) {
+    public Reader(long id, String firstName, String lastName, String email, boolean agreementMailing) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.address = address;
+        this.email = email;
         this.agreementMailing = agreementMailing;
         bookList = new ArrayList<>();
     }

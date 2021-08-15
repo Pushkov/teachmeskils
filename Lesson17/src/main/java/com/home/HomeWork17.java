@@ -1,11 +1,19 @@
 package com.home;
 
+import com.home.library.model.Book;
+import com.home.library.model.Library;
+import com.home.library.model.Reader;
+import com.home.library.service.IBookService;
+import com.home.library.service.IMessagingService;
+import com.home.library.service.IReaderService;
+import com.home.library.service.LibraryManager;
 import com.home.model.Car;
 import com.home.util.MyUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
 
+import static com.home.library.util.LibraryUtils.print;
 import static com.home.util.MyUtil.*;
 import static java.util.stream.Collectors.counting;
 import static java.util.stream.Collectors.groupingBy;
@@ -16,8 +24,9 @@ public class HomeWork17 {
 //        point2();
 //        point3();
 //        point4();
-        point5_1();
+//        point5_1();
 //        point5_2();
+        point6();
     }
 
     private static void point1() {
@@ -66,7 +75,7 @@ public class HomeWork17 {
     private static void point5_1() {
         var list = getPersonsList();
         list.stream()
-                .filter(person -> person.getLastName().startsWith("К"))
+                .filter(person -> person.getLastName().startsWith("Д"))
                 .forEach(System.out::println);
     }
 
@@ -77,22 +86,54 @@ public class HomeWork17 {
         print(personsByFirstLetterInLastName);
     }
 
-    public static void print(Map<String, Long> map) {
-        Set<String> keys = map.keySet();
-        keys.forEach(k ->
-                System.out.printf("%s - %d сотрудник%s\n", k, map.get(k), getEnding(Math.toIntExact(map.get(k)))));
+    private static void point6() {
+//        Library library = new Library();
+//        library.getBooksList().addAll(initBookList());
+        LibraryManager libraryManager = new LibraryManager(new Library());
+        IBookService bookService = libraryManager.getBookService();
+        IReaderService readerService = libraryManager.getReaderService();
+        IMessagingService messagingService = libraryManager.getMessagingService();
+        initBookList().forEach(bookService::addBookToLibrary);
+        initReadersList().forEach(readerService::addReaderToLibrary);
+
+        System.out.println("1 - ");
+        printCollection(bookService.findAllBooks());
+        System.out.println("\n2 - ");
+        printCollection(bookService.findAllBooksOrderByYear());
+        System.out.println("\n3 - ");
+        printCollection(readerService.findAllReaders());
+        System.out.println("\n4 - ");
+        printCollection(messagingService.createMailingList("for all", readerService.findAllReaders()));
+        System.out.println("\n5 - ");
+        printCollection(messagingService.createMailingList("for agree", readerService.findAllAgreeReaders()));
+
+
     }
 
-    private static String getEnding(int count) {
-        int var1 = count % 10;
-        int var2 = count % 100;
-        String var3 = "";
-        if (var1 >= 2) {
-            var3 = "а";
-        }
-        if (var1 >= 5 || var1 == 0 || var2 >= 11 & var2 <= 14) {
-            var3 = "ов";
-        }
-        return var3;
+    private static List<Book> initBookList() {
+        return List.of(
+                new Book(1, "Александр", "Пушкин", "Сергеевич", "Сказки", 1998),
+                new Book(3, "Александр", "Пушкин", "Сергеевич", "Евгений Онегин", 2005),
+                new Book(4, "Михаил", "Лермонтов", "Юрьевич", "Бородино", 2010),
+                new Book(5, "Михаил", "Лермонтов", "Юрьевич", "Кавказский пленник", 2003),
+                new Book(7, "Лев", "Толстой", "Николаевич", "Война и мир", 2015),
+                new Book(8, "Федор", "Достоевский", "Михайлович", "Идиот", 2017),
+                new Book(9, "Федор", "Достоевский", "Михайлович", "Братья Карамазовы", 2001),
+                new Book(11, "Эрнест", "Хемингуэй", "", "Старик и море", 1998),
+                new Book(12, "Алексей", "Толстой", "Николаевич", "Петр 1", 1969),
+                new Book(20, "Михаил", "Булгаков", "Афанасьевич", "Мастер и Маргарита", 1987)
+        );
     }
+
+    private static List<Reader> initReadersList() {
+        return List.of(
+                new Reader(1, "Алекс", "Александров", "alex@mail.ru", true),
+                new Reader(2, "Иван", "Иванов", "ivan@rambler.ru", false),
+                new Reader(3, "Петр", "Петров", "pp@mail.ru", true),
+                new Reader(6, "Денис", "Денисов", "den@gmail.com", false),
+                new Reader(7, "Виктор", "Викторов", "vvv@tut.by", false),
+                new Reader(8, "Сергей", "Сергеев", "serg@yahoo.com", true)
+        );
+    }
+
 }
