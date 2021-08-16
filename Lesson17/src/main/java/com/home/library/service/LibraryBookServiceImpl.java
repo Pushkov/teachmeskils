@@ -2,6 +2,7 @@ package com.home.library.service;
 
 import com.home.library.model.Book;
 import com.home.library.model.Library;
+import com.home.library.model.Reader;
 import lombok.AllArgsConstructor;
 
 import java.util.Comparator;
@@ -10,7 +11,7 @@ import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 @AllArgsConstructor
-public class BookServiceImpl implements IBookService {
+public class LibraryBookServiceImpl implements ILibraryBookService {
     private final Library library;
 
     @Override
@@ -49,12 +50,17 @@ public class BookServiceImpl implements IBookService {
     }
 
     @Override
+    public List<Book> findAllBooksByReader(Reader reader) {
+        return reader.getBookList();
+    }
+
+    @Override
     public void addBookToLibrary(Book book) {
         findAllBooks().add(book);
     }
 
     @Override
     public void removeBookFromLibrary(Book book) {
-
+        findAllBooks().remove(book);
     }
 }

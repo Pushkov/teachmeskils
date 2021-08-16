@@ -4,7 +4,7 @@ import com.home.library.model.Reader;
 
 import java.util.List;
 
-public interface IReaderService {
+public interface ILibraryReaderService {
     Reader findById(int id);
 
     List<Reader> findAllReaders();
@@ -14,6 +14,4 @@ public interface IReaderService {
     void addReaderToLibrary(Reader reader);
 
     void removeReaderFromLibrary(Reader reader);
-
-    List<Reader> findAllOwnersByAuthor(String authorName, String authorSurname, String authorPatronymic);
 }

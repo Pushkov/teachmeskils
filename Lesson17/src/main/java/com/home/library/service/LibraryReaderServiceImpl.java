@@ -9,7 +9,7 @@ import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 @AllArgsConstructor
-public class ReaderServiceImpl implements IReaderService {
+public class LibraryReaderServiceImpl implements ILibraryReaderService {
     private final Library library;
 
     @Override
@@ -42,17 +42,17 @@ public class ReaderServiceImpl implements IReaderService {
         findAllReaders().remove(reader);
     }
 
-    @Override
-    public List<Reader> findAllOwnersByAuthor(String authorName, String authorSurname, String authorPatronymic) {
-        return findAllReaders().stream()
-                .filter(reader -> isOwner(authorName, authorSurname, authorPatronymic, reader))
-                .collect(Collectors.toList());
-    }
+//    @Override
+//    public List<Reader> findAllOwnersByAuthor(String authorName, String authorSurname, String authorPatronymic) {
+//        return findAllReaders().stream()
+//                .filter(reader -> isOwner(authorName, authorSurname, authorPatronymic, reader))
+//                .collect(Collectors.toList());
+//    }
 
-    private boolean isOwner(String authorName, String authorSurname, String authorPatronymic, Reader reader) {
-        return reader.getBookList().stream()
-                .anyMatch(book -> book.getAuthorName().equals(authorName) &&
-                        book.getAuthorSurname().equals(authorSurname) &&
-                        book.getAuthorPatronymic().equals(authorPatronymic));
-    }
+//    private boolean isOwner(String authorName, String authorSurname, String authorPatronymic, Reader reader) {
+//        return reader.getBookList().stream()
+//                .anyMatch(book -> book.getAuthorName().equals(authorName) &&
+//                        book.getAuthorSurname().equals(authorSurname) &&
+//                        book.getAuthorPatronymic().equals(authorPatronymic));
+//    }
 }

@@ -1,10 +1,11 @@
 package com.home.library.service;
 
 import com.home.library.model.Book;
+import com.home.library.model.Reader;
 
 import java.util.List;
 
-public interface IBookService {
+public interface ILibraryBookService {
     Book findById(int id);
 
     Book findByBookName(String name);
@@ -16,6 +17,8 @@ public interface IBookService {
     List<Book> findAllBooks();
 
     List<Book> findAllBooksOrderByYear();
+
+    List<Book> findAllBooksByReader(Reader reader);
 
     void addBookToLibrary(Book book);
 

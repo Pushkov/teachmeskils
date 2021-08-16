@@ -17,12 +17,13 @@ public class MyUtil {
                 .collect(Collectors.toList());
     }
 
-    public static void printCollection(Collection<?> list) {
-        list.forEach(MyUtil::printWord);
+    public static void printCollection(Collection<?> list, boolean inLine) {
+        list.forEach(obj -> printWord(obj, inLine));
     }
 
-    public static void printWord(Object word) {
-        System.out.print(word.toString() + " ");
+    public static void printWord(Object word, boolean inLine) {
+        String ending = inLine ? " " : "\n";
+        System.out.print(word.toString() + ending);
     }
 
     public static Set<Integer> getSet() {

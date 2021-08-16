@@ -11,7 +11,7 @@ import java.util.Set;
 @UtilityClass
 public class LibraryUtils {
 
-    public static void print(Map<String, Long> map) {
+    public static void printMap(Map<String, Long> map) {
         Set<String> keys = map.keySet();
         keys.forEach(k ->
                 System.out.printf("%s - %d сотрудник%s\n", k, map.get(k), getEnding(map.get(k))));
