@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 public class MessagingServiceImpl implements IMessagingService {
     @Override
     public List<EmailAddress> createMailingList(String message, List<Reader> readers) {
-        return (List<EmailAddress>) readers.stream()
+        return readers.stream()
                 .map(r -> new EmailAddress(r.getEmail(), message))
                 .collect(Collectors.toList());
     }

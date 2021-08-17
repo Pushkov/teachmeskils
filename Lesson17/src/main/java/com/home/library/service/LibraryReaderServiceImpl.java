@@ -41,18 +41,4 @@ public class LibraryReaderServiceImpl implements ILibraryReaderService {
     public void removeReaderFromLibrary(Reader reader) {
         findAllReaders().remove(reader);
     }
-
-//    @Override
-//    public List<Reader> findAllOwnersByAuthor(String authorName, String authorSurname, String authorPatronymic) {
-//        return findAllReaders().stream()
-//                .filter(reader -> isOwner(authorName, authorSurname, authorPatronymic, reader))
-//                .collect(Collectors.toList());
-//    }
-
-//    private boolean isOwner(String authorName, String authorSurname, String authorPatronymic, Reader reader) {
-//        return reader.getBookList().stream()
-//                .anyMatch(book -> book.getAuthorName().equals(authorName) &&
-//                        book.getAuthorSurname().equals(authorSurname) &&
-//                        book.getAuthorPatronymic().equals(authorPatronymic));
-//    }
 }

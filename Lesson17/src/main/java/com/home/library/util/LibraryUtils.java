@@ -1,10 +1,7 @@
 package com.home.library.util;
 
-import com.home.library.model.Book;
 import lombok.experimental.UtilityClass;
 
-import java.util.Comparator;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -28,12 +25,5 @@ public class LibraryUtils {
             var3 = "ов";
         }
         return var3;
-    }
-
-    public static int createId(List<Book> list) {
-        return list.stream()
-                .map(Book::getId)
-                .max(Comparator.naturalOrder())
-                .orElse(0) + 1;
     }
 }

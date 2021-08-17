@@ -23,7 +23,7 @@ public class LibraryManager implements ILibraryService {
     }
 
     @Override
-    public void getBookToReader(int bookId, int readerId) {
+    public void getBookToReader(int readerId, int bookId) {
         try {
             Book book = bookService.findById(bookId);
             List<Book> readersBooks = getBooksFromReader(readerId);

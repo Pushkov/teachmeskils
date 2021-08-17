@@ -23,21 +23,6 @@ public class LibraryBookServiceImpl implements ILibraryBookService {
     }
 
     @Override
-    public Book findByBookName(String name) {
-        return null;
-    }
-
-    @Override
-    public Book findByAuthorName(String authorName) {
-        return null;
-    }
-
-    @Override
-    public Book findByAuthorSurname(String authorSurname) {
-        return null;
-    }
-
-    @Override
     public List<Book> findAllBooks() {
         return library.getBooksList();
     }

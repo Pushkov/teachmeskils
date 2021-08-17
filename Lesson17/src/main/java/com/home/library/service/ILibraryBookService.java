@@ -8,12 +8,6 @@ import java.util.List;
 public interface ILibraryBookService {
     Book findById(int id);
 
-    Book findByBookName(String name);
-
-    Book findByAuthorName(String authorName);
-
-    Book findByAuthorSurname(String authorSurname);
-
     List<Book> findAllBooks();
 
     List<Book> findAllBooksOrderByYear();
