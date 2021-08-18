@@ -29,3 +29,7 @@ hs_err_pid*
 /Lesson9_wear/target/
 /Lesson14/src/main/resources/hw1/output.txt
 /Lesson14/src/main/resources/hw2/output.txt
+/MyProjects/TelegramSpring/.mvn/wrapper/
+/MyProjects/TelegramSpring/.mvn/wrapper/maven-wrapper.jar
+/MyProjects/TelegramSpring/.mvn/wrapper/maven-wrapper.properties
+/MyProjects/TelegramSpring/.mvn/wrapper/MavenWrapperDownloader.java
