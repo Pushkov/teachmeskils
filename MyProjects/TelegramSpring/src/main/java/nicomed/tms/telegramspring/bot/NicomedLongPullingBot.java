@@ -1,10 +1,11 @@
 package nicomed.tms.telegramspring.bot;
 
-import nicomed.tms.telegramspring.Grade;
+import nicomed.tms.telegramspring.enums.Grade;
 import nicomed.tms.telegramspring.model.City;
 import nicomed.tms.telegramspring.model.Place;
 import nicomed.tms.telegramspring.service.CityService;
 import nicomed.tms.telegramspring.service.PlaceService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -46,17 +47,22 @@ public class NicomedLongPullingBot extends TelegramLongPollingBot {
             String chatId = update.getMessage().getChatId().toString();
             System.out.println("");
             try {
-                String cityName = update.getMessage().getText();
+                String cityName = update.getMessage().getText().toLowerCase();
                 String s = "*";
                 if (cityService.findCityByName(cityName) != null) {
                     City city = cityService.findCityByName(cityName);
                     s = "\n" + getString(
-                            cityName,
+                            StringUtils.capitalize(cityName),
                             placeService.findAllByCity(city).stream()
                                     .collect(partitioningBy(
                                             v -> v.getGrade() == Grade.GOOD,
                                             toList()))
                     );
+                } else if (cityName.equalsIgnoreCase("все города")) {
+                    s = cityService.findAll().stream()
+                            .map(City::getName)
+                            .map(StringUtils::capitalize)
+                            .collect(Collectors.joining(", "));
                 } else {
                     s = "Не знаю такого города";
                 }

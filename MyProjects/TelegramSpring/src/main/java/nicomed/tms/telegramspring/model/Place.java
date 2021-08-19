@@ -1,7 +1,7 @@
 package nicomed.tms.telegramspring.model;
 
 import lombok.Data;
-import nicomed.tms.telegramspring.Grade;
+import nicomed.tms.telegramspring.enums.Grade;
 
 import javax.persistence.*;
 
