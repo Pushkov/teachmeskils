@@ -13,12 +13,12 @@ import static java.util.stream.Collectors.groupingBy;
 
 public class HomeWork17 {
     public static void main(String[] args) {
-        point1();
-        point2();
-        point3();
-        point4();
-        point5_1();
-        point5_2();
+//        point1();
+//        point2();
+//        point3();
+//        point4();
+//        point5_1();
+//        point5_2();
         point6();
     }
 

@@ -46,81 +46,42 @@ public class NicomedLongPullingBot extends TelegramLongPollingBot {
             String chatId = update.getMessage().getChatId().toString();
             System.out.println("");
             try {
-                List<City> list = cityService.findAll();
-                String mess = "*";
-                if (list.size() > 0) {
-                    mess = list.stream()
-                            .map(City::getName)
-                            .collect(Collectors.joining(",\n", "\n", "\n"));
-                    printList(list);
-
-
-//                    Map<String, Map<Boolean, List<Place>>> map = list.stream()
-//                            .collect(Collectors.toMap(City::getName,
-//                                    m -> getMapPlaces(placeService.findAllByCity(m))));
-//                    System.out.println(map);
-
-//                    List<String> mm = map.entrySet().stream()
-//                            .map((k,v) -> "" + k + " " + getStringFromMap(v))
-//                            .collect(Collectors.toList());
-
-
+                String cityName = update.getMessage().getText();
+                String s = "*";
+                if (cityService.findCityByName(cityName) != null) {
+                    City city = cityService.findCityByName(cityName);
+                    s = "\n" + getString(
+                            cityName,
+                            placeService.findAllByCity(city).stream()
+                                    .collect(partitioningBy(
+                                            v -> v.getGrade() == Grade.GOOD,
+                                            toList()))
+                    );
+                } else {
+                    s = "Не знаю такого города";
                 }
-
-                execute(new SendMessage(chatId, "test message: " + mess));
+                execute(new SendMessage(chatId, s));
             } catch (TelegramApiException e) {
                 e.printStackTrace();
             }
         }
     }
 
-    private List<String> getStringFromMap(Map<Boolean, List<Place>> map) {
-        map.values()
-                .stream()
-                .map(this::getStringByList)
-                .collect(toList());
-
-        return null;
+    private String getString(String city, Map<Boolean, List<Place>> list) {
+        String good = "";
+        if (list.get(true).size() != 0) {
+            good = " Надо посетить " + getStringByList(list.get(true)) + ".";
+        }
+        String bad = "";
+        if (list.get(false).size() != 0) {
+            bad = " Не надо посещать " + getStringByList(list.get(false));
+        }
+        return city + good + bad + ".\n";
     }
 
     private String getStringByList(List<Place> list) {
-        String res = list.stream()
+        return list.stream()
                 .map(place -> String.join(",", place.getName()))
                 .collect(Collectors.joining(","));
-            /*
-                    String stringOk = listOk.stream()
-                .map(reader -> join(" ", List.of(reader.getFirstName(), reader.getLastName())))
-                .collect(joining(",", "{", "}"));
-             */
-
-        return "";
     }
-
-
-    private Map<Boolean, List<Place>> getMapPlaces(List<Place> list) {
-        return list.stream()
-                .collect(partitioningBy(
-                        place -> place.getGrade() == Grade.GOOD,
-                        toList()
-                ));
-    }
-
-    private List<String> getPlacesName(List<Place> list) {
-        return list.stream()
-                .map(Place::getName)
-                .collect(Collectors.toList());
-    }
-
-    private void printList(List<City> list) {
-        list.forEach(System.out::println);
-    }
-
-//    private void printMap(Map<String,Map<Boolean,List<Place>>> map) {
-//        map.entrySet().stream()
-//                .map((k,v)-> {
-//                    String.join()
-//                });
-//
-//    }
-
 }

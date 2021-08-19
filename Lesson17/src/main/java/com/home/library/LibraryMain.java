@@ -34,6 +34,19 @@ public class LibraryMain {
         var keys = initBooksMap.keySet();
         keys.forEach(k -> initBooksMap.get(k).forEach(value -> libraryManager.getBookToReader(k, value)));
 
+        readerService.findById(1).getBookList().add(bookService.findById(1));
+        readerService.findById(1).getBookList().add(bookService.findById(4));
+        readerService.findById(1).getBookList().add(bookService.findById(5));
+        readerService.findById(1).getBookList().add(bookService.findById(7));
+        readerService.findById(2).getBookList().add(bookService.findById(1));
+        readerService.findById(2).getBookList().add(bookService.findById(1));
+
+        //        System.out.println("");
+//        initBooksMap.entrySet()
+//                .stream()
+//                .map((k,v) -> libraryManager.getBookToReader(k,) );
+
+
         point_1();
         point_2();
         point_3();
@@ -141,7 +154,9 @@ public class LibraryMain {
                         reader -> bookService.findAllBooksByReader(reader).size() >= 2,
                         toList()
                 ));
+
     }
+
 
     private List<Book> initBookList() {
         return List.of(
@@ -165,7 +180,8 @@ public class LibraryMain {
                 new Reader(3, "Петр", "Петров", "pp@mail.ru", true),
                 new Reader(6, "Денис", "Денисов", "den@gmail.com", false),
                 new Reader(7, "Виктор", "Викторов", "vvv@tut.by", false),
-                new Reader(8, "Сергей", "Сергеев", "serg@yahoo.com", true)
+                new Reader(8, "Сергей", "Сергеев", "serg@yahoo.com", true),
+                new Reader(9, "Сергей1", "Сергеев1", "serg1@yahoo.com", true)
         );
     }
 
@@ -176,6 +192,7 @@ public class LibraryMain {
                 3, List.of(20),
                 6, List.of(3, 8, 9, 11),
                 7, List.of(11, 12, 20),
-                8, List.of(1));
+                8, List.of(1),
+                9, List.of(1));
     }
 }

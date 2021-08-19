@@ -15,4 +15,9 @@ public class CityServiceImpl implements CityService {
     public List<City> findAll() {
         return repository.findAll();
     }
+
+    @Override
+    public City findCityByName(String name) {
+        return repository.findCityByName(name).orElse(null);
+    }
 }
