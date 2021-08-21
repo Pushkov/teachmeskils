@@ -10,7 +10,6 @@ import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
-import java.util.concurrent.TimeUnit;
 
 public class HomeWork18 {
     public static final int CASH_REGISTER = 5;
@@ -26,15 +25,10 @@ public class HomeWork18 {
 
         final ThreadFactory threadFactory = new ThreadFactoryBuilder()
                 .setNameFormat(" №-%d")
-                .setDaemon(true)
                 .build();
         final ExecutorService service = Executors.newFixedThreadPool(CASH_REGISTER, threadFactory);
         users.forEach(service::submit);
         service.shutdown();
-        boolean done = service.awaitTermination(1, TimeUnit.MINUTES);
-        if (done) {
-            System.out.println(("Все покупатели были обслужены."));
-        }
     }
 
     private static int getProductCount() {
