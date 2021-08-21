@@ -27,7 +27,6 @@ public class User implements Runnable {
             try {
                 Thread.sleep(500);
             } catch (InterruptedException e) {
-                System.out.println(" error");
                 e.printStackTrace();
             }
         }
