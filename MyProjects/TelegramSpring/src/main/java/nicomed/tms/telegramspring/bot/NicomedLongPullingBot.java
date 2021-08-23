@@ -6,6 +6,7 @@ import nicomed.tms.telegramspring.model.Place;
 import nicomed.tms.telegramspring.service.CityService;
 import nicomed.tms.telegramspring.service.PlaceService;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -18,13 +19,19 @@ import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.partitioningBy;
 import static java.util.stream.Collectors.toList;
-import static nicomed.tms.telegramspring.bot.NicBotConfig.TOKEN;
-import static nicomed.tms.telegramspring.bot.NicBotConfig.USER_NAME;
 
 @Component
 public class NicomedLongPullingBot extends TelegramLongPollingBot {
+
     private final CityService cityService;
     private final PlaceService placeService;
+
+    @Value("${bot.token}")
+    private String TOKEN;
+    @Value("${bot.username}")
+    private String USER_NAME;
+    @Value("${bot.name}")
+    private String NAME;
 
     public NicomedLongPullingBot(CityService cityService, PlaceService placeService) {
         this.cityService = cityService;
@@ -72,6 +79,7 @@ public class NicomedLongPullingBot extends TelegramLongPollingBot {
             }
         }
     }
+
 
     private String getString(String city, Map<Boolean, List<Place>> list) {
         String good = "";

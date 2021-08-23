@@ -1,9 +1,15 @@
 package nicomed.tms.telegramspring.bot;
 
-import lombok.experimental.UtilityClass;
+import org.springframework.core.env.Environment;
 
-@UtilityClass
 public class NicBotConfig {
-    public static final String TOKEN = "1997621601:AAHfGKwXTKAgHrneDqlePP7AGmnBfwAz2SA";
-    public static final String USER_NAME = "nicTestBot1";
+
+    private static Environment env;
+
+//    @Value("${bot.token}")
+//    public static String TOKEN = env.getProperty("bot.token");
+//    @Value("${bot.username}")
+//    public static String USER_NAME = env.getProperty("bot.username");
+//    @Value("${bot.name}")
+//    public static String NAME = env.getProperty("bot.name");
 }
