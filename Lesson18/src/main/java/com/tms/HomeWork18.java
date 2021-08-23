@@ -17,7 +17,7 @@ public class HomeWork18 {
     public static final int PRODUCT_LIMIT = 5;
     public static Random random = new Random();
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
         Factory factory = Factory.getInstance();
         List<User> users = factory.create(User.class, USERS_COUNT);
         users.forEach(u -> u.setProducts(factory.create(Product.class, getProductCount())));

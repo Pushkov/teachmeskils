@@ -23,7 +23,7 @@ public class User implements Runnable {
         String cashRegistersName = Thread.currentThread().getName();
         System.out.println("Касса" + cashRegistersName + " обслуживает покупателя " + name + " :");
         for (Product product : products) {
-            System.out.println(" - Оплата товара: " + product.getName() + " в кассе " + cashRegistersName);
+            System.out.println(" - Оплата товара: " + product.getName() + " покупателем " + name + ", в кассе " + cashRegistersName);
             try {
                 Thread.sleep(500);
             } catch (InterruptedException e) {

@@ -1,13 +1,11 @@
 package com.tms.produce;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Factory {
-    int Id;
-
     private Factory() {
     }
 
@@ -21,21 +19,18 @@ public class Factory {
     }
 
     public <T extends Object> List<T> create(Class<T> clazz, int limit) {
-        Id = 1;
-        return Stream.generate(() -> {
-            try {
-                return clazz.getDeclaredConstructor(Integer.class).newInstance(getId());
-            } catch (InstantiationException | InvocationTargetException | IllegalAccessException | NoSuchMethodException e) {
-                e.printStackTrace();
-            }
-            return null;
-        })
+        AtomicInteger id = new AtomicInteger(0);
+        return Stream.generate(() -> createObjectByClass(clazz, id))
                 .limit(limit)
                 .collect(Collectors.toList());
     }
 
-    private int getId() {
-        return Id++;
+    private <T> T createObjectByClass(Class<T> clazz, AtomicInteger id) {
+        try {
+            return clazz.getDeclaredConstructor(Integer.class).newInstance(id.incrementAndGet());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
     }
-
 }
