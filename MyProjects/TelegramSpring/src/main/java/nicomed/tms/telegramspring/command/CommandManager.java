@@ -24,12 +24,16 @@ public class CommandManager {
     }
 
     public String getStringByReceivedText(String text) {
-        return "\n" + getString(
-                StringUtils.capitalize(text),
-                service.findAllPlacesByCityName(text).stream()
-                        .collect(partitioningBy(
-                                v -> v.getGrade() == Grade.GOOD,
-                                toList())));
+        City city = service.findCityByName(text.toLowerCase());
+        if (city != null) {
+            return "\n" + getString(
+                    StringUtils.capitalize(text),
+                    service.findAllPlacesByCity(city).stream()
+                            .collect(partitioningBy(
+                                    v -> v.getGrade() == Grade.GOOD,
+                                    toList())));
+        }
+        return "Не знаю такого города";
     }
 
     public String getStringByCommand(Command command) {
