@@ -2,6 +2,7 @@ package nicomed.tms.telegramspring.service;
 
 import nicomed.tms.telegramspring.model.City;
 import nicomed.tms.telegramspring.model.Place;
+import nicomed.tms.telegramspring.repository.PlaceRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

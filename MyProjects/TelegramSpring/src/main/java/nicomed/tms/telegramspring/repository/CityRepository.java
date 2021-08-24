@@ -1,4 +1,4 @@
-package nicomed.tms.telegramspring.service;
+package nicomed.tms.telegramspring.repository;
 
 import nicomed.tms.telegramspring.model.City;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -1,6 +1,8 @@
 package nicomed.tms.telegramspring.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import nicomed.tms.telegramspring.enums.Grade;
 
 import javax.persistence.*;
@@ -8,6 +10,8 @@ import javax.persistence.*;
 @Entity
 @Table(name = "places")
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Place {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,4 +25,9 @@ public class Place {
 
     @Enumerated(value = EnumType.STRING)
     private Grade grade;
+
+    public Place(String name, Grade grade) {
+        this.name = name;
+        this.grade = grade;
+    }
 }

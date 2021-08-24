@@ -1,11 +1,9 @@
 package nicomed.tms.telegramspring.bot;
 
-import nicomed.tms.telegramspring.enums.Grade;
-import nicomed.tms.telegramspring.model.City;
+import nicomed.tms.telegramspring.command.CommandManager;
+import nicomed.tms.telegramspring.command.CommandParser;
+import nicomed.tms.telegramspring.enums.Command;
 import nicomed.tms.telegramspring.model.Place;
-import nicomed.tms.telegramspring.service.CityService;
-import nicomed.tms.telegramspring.service.PlaceService;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
@@ -17,14 +15,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import static java.util.stream.Collectors.partitioningBy;
-import static java.util.stream.Collectors.toList;
-
 @Component
 public class NicomedLongPullingBot extends TelegramLongPollingBot {
-
-    private final CityService cityService;
-    private final PlaceService placeService;
+    private final CommandParser commandParser;
+    private final CommandManager commandManager;
 
     @Value("${bot.token}")
     private String TOKEN;
@@ -33,14 +27,9 @@ public class NicomedLongPullingBot extends TelegramLongPollingBot {
     @Value("${bot.name}")
     private String NAME;
 
-    public NicomedLongPullingBot(CityService cityService, PlaceService placeService) {
-        this.cityService = cityService;
-        this.placeService = placeService;
-    }
-
-    @Override
-    public String getBotUsername() {
-        return USER_NAME;
+    public NicomedLongPullingBot(CommandParser commandParser, CommandManager commandManager) {
+        this.commandParser = commandParser;
+        this.commandManager = commandManager;
     }
 
     @Override
@@ -49,37 +38,52 @@ public class NicomedLongPullingBot extends TelegramLongPollingBot {
     }
 
     @Override
+    public String getBotUsername() {
+        return USER_NAME;
+    }
+
+
+    @Override
     public void onUpdateReceived(Update update) {
-        if (update.getMessage() != null && update.getMessage().hasText()) {
-            String chatId = update.getMessage().getChatId().toString();
-            System.out.println("");
-            try {
-                String cityName = update.getMessage().getText().toLowerCase();
-                String s = "*";
-                if (cityService.findCityByName(cityName) != null) {
-                    City city = cityService.findCityByName(cityName);
-                    s = "\n" + getString(
-                            StringUtils.capitalize(cityName),
-                            placeService.findAllByCity(city).stream()
-                                    .collect(partitioningBy(
-                                            v -> v.getGrade() == Grade.GOOD,
-                                            toList()))
-                    );
-                } else if (cityName.equalsIgnoreCase("все города")) {
-                    s = cityService.findAll().stream()
-                            .map(City::getName)
-                            .map(StringUtils::capitalize)
-                            .collect(Collectors.joining(", "));
+        if (update.hasMessage()) {
+            if (update.getMessage() != null && update.getMessage().hasText()) {
+                String receivedText = update.getMessage().getText();
+                String chatType = update.getMessage().getChat().getType();
+                String chatId = update.getMessage().getChatId().toString();
+
+                String message;
+                if (commandParser.isCommand(receivedText)) {
+                    if (commandParser.isCommandForMe(receivedText, chatType)) {
+                        Command command = commandParser.getCommand(receivedText);
+                        message = commandManager.getStringByCommand(command);
+                        sendMessage(new SendMessage(chatId, message));
+                    }
                 } else {
-                    s = "Не знаю такого города";
+                    message = commandManager.getStringByReceivedText(receivedText);
+                    sendMessage(new SendMessage(chatId, message));
                 }
-                execute(new SendMessage(chatId, s));
-            } catch (TelegramApiException e) {
-                e.printStackTrace();
             }
+        } else if (update.hasCallbackQuery()) {
+
         }
     }
 
+//    private String getStringByCity(String receivedText, City city) {
+//        return "\n" + getString(
+//                StringUtils.capitalize(receivedText),
+//                placeService.findAllByCity(city).stream()
+//                        .collect(partitioningBy(
+//                                v -> v.getGrade() == Grade.GOOD,
+//                                toList())));
+//    }
+
+    private void sendMessage(SendMessage message) {
+        try {
+            execute(message);
+        } catch (TelegramApiException e) {
+            e.printStackTrace();
+        }
+    }
 
     private String getString(String city, Map<Boolean, List<Place>> list) {
         String good = "";

@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -19,10 +20,15 @@ public class City {
 
     private String name;
 
-    @OneToMany(mappedBy = "city")
+    @OneToMany(mappedBy = "city", cascade = CascadeType.ALL)
     private List<Place> places;
 
-//    @Override
+    public City(String name) {
+        this.name = name;
+        places = new ArrayList<>();
+    }
+
+    //    @Override
 //    public String toString() {
 //        return "City{" +
 //                "id=" + id +
