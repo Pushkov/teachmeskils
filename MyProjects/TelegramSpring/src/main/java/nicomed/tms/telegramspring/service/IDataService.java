@@ -6,16 +6,22 @@ import nicomed.tms.telegramspring.model.Place;
 
 import java.util.List;
 
-public interface DataService {
+public interface IDataService {
 
     City findCityByName(String name);
+
     List<City> findAllCities();
+
     boolean addCity(String cityName);
+
     boolean editCity(String cityName);
+
     boolean removeCity(String cityName);
 
     Place findPlaceById(Long id);
+
     Place findPlaceByName(String name);
+
     List<Place> findAllPlaces();
     List<Place> findAllPlacesByCity(City city);
     List<Place> findAllPlacesByCityName(String cityName);

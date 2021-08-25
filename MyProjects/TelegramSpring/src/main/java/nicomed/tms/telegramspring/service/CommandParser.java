@@ -1,15 +1,12 @@
-package nicomed.tms.telegramspring.command;
+package nicomed.tms.telegramspring.service;
 
 import lombok.extern.slf4j.Slf4j;
-import nicomed.tms.telegramspring.enums.Command;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 
 import static nicomed.tms.telegramspring.util.Constants.COMMAND_DELIMETR;
 import static nicomed.tms.telegramspring.util.Constants.COMMAND_PREFIX;
 
 @Slf4j
-@Component
 public class CommandParser {
 
     @Value("${bot.name}")
@@ -33,16 +30,8 @@ public class CommandParser {
         }
     }
 
-    public Command getCommand(String text) {
-        String commandText = getCommandFullText(text).split(COMMAND_DELIMETR)[0].toUpperCase();
-        Command command = Command.NONE;
-        try {
-            command = Command.valueOf(commandText);
-        } catch (IllegalArgumentException e) {
-            command = Command.NON_COMMAND;
-            log.error("Команда не распознана: " + commandText);
-        }
-        return command;
+    public String getCommand(String text) {
+        return getCommandFullText(text).split(COMMAND_DELIMETR)[0].toUpperCase();
     }
 
 

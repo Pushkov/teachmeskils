@@ -1,24 +1,21 @@
 package nicomed.tms.telegramspring.bot;
 
-import nicomed.tms.telegramspring.command.CommandManager;
-import nicomed.tms.telegramspring.command.CommandParser;
-import nicomed.tms.telegramspring.enums.Command;
-import nicomed.tms.telegramspring.model.Place;
+import lombok.extern.slf4j.Slf4j;
+import nicomed.tms.telegramspring.command.*;
+import nicomed.tms.telegramspring.service.CommandsServiceImpl;
+import nicomed.tms.telegramspring.service.ICommandsService;
+import nicomed.tms.telegramspring.service.IDataService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-
 @Component
+@Slf4j
 public class NicomedLongPullingBot extends TelegramLongPollingBot {
-    private final CommandParser commandParser;
-    private final CommandManager commandManager;
 
     @Value("${bot.token}")
     private String TOKEN;
@@ -27,9 +24,20 @@ public class NicomedLongPullingBot extends TelegramLongPollingBot {
     @Value("${bot.name}")
     private String NAME;
 
-    public NicomedLongPullingBot(CommandParser commandParser, CommandManager commandManager) {
-        this.commandParser = commandParser;
-        this.commandManager = commandManager;
+    private final ICommandsService commandsService;
+    private final IDataService dataService;
+
+    public NicomedLongPullingBot(IDataService dataService) {
+        this.dataService = dataService;
+        commandsService = new CommandsServiceImpl();
+        initCommands();
+    }
+
+    private void initCommands() {
+        commandsService.setDefaultCommand(new DataCommand(dataService));
+        commandsService.register(new StartCommand());
+        commandsService.register(new InfoCommand(dataService));
+        commandsService.register(new HelpCommand(commandsService));
     }
 
     @Override
@@ -45,37 +53,25 @@ public class NicomedLongPullingBot extends TelegramLongPollingBot {
 
     @Override
     public void onUpdateReceived(Update update) {
+
         if (update.hasMessage()) {
             if (update.getMessage() != null && update.getMessage().hasText()) {
-                String receivedText = update.getMessage().getText();
-                String chatType = update.getMessage().getChat().getType();
-                String chatId = update.getMessage().getChatId().toString();
-
-                String message;
-                if (commandParser.isCommand(receivedText)) {
-                    if (commandParser.isCommandForMe(receivedText, chatType)) {
-                        Command command = commandParser.getCommand(receivedText);
-                        message = commandManager.getStringByCommand(command);
-                        sendMessage(new SendMessage(chatId, message));
-                    }
-                } else {
-                    message = commandManager.getStringByReceivedText(receivedText);
-                    sendMessage(new SendMessage(chatId, message));
+                Message receivedMessage = update.getMessage();
+                String receivedText = receivedMessage.getText();
+                String chatId = receivedMessage.getChatId().toString();
+                BaseBotCommand command = commandsService.getDefaultCommand();
+                if (commandsService.isCommand(receivedText)) {
+                    command = commandsService.get(receivedText);
                 }
+                log.info("command - " + command.getCommand());
+                sendMessage(new SendMessage(
+                        chatId,
+                        command.getMessageText(receivedText)));
             }
         } else if (update.hasCallbackQuery()) {
 
         }
     }
-
-//    private String getStringByCity(String receivedText, City city) {
-//        return "\n" + getString(
-//                StringUtils.capitalize(receivedText),
-//                placeService.findAllByCity(city).stream()
-//                        .collect(partitioningBy(
-//                                v -> v.getGrade() == Grade.GOOD,
-//                                toList())));
-//    }
 
     private void sendMessage(SendMessage message) {
         try {
@@ -83,23 +79,5 @@ public class NicomedLongPullingBot extends TelegramLongPollingBot {
         } catch (TelegramApiException e) {
             e.printStackTrace();
         }
-    }
-
-    private String getString(String city, Map<Boolean, List<Place>> list) {
-        String good = "";
-        if (list.get(true).size() != 0) {
-            good = " Надо посетить " + getStringByList(list.get(true)) + ".";
-        }
-        String bad = "";
-        if (list.get(false).size() != 0) {
-            bad = " Не надо посещать " + getStringByList(list.get(false));
-        }
-        return city + good + bad + ".\n";
-    }
-
-    private String getStringByList(List<Place> list) {
-        return list.stream()
-                .map(place -> String.join(",", place.getName()))
-                .collect(Collectors.joining(","));
     }
 }

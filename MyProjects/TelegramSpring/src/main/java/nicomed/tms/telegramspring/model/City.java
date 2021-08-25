@@ -28,11 +28,11 @@ public class City {
         places = new ArrayList<>();
     }
 
-    //    @Override
-//    public String toString() {
-//        return "City{" +
-//                "id=" + id +
-//                ", name='" + name + '\'' +
-//                '}';
-//    }
+    @Override
+    public String toString() {
+        return "City{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

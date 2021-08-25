@@ -5,16 +5,16 @@ import nicomed.tms.telegramspring.model.City;
 import nicomed.tms.telegramspring.model.Place;
 import nicomed.tms.telegramspring.repository.CityRepository;
 import nicomed.tms.telegramspring.repository.PlaceRepository;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@Service
-public class BotDataServiceImpl implements DataService {
+@Component
+public class DataServiceImpl implements IDataService {
     private final CityRepository cityRepository;
     private final PlaceRepository placeRepository;
 
-    public BotDataServiceImpl(CityRepository cityRepository, PlaceRepository placeRepository) {
+    public DataServiceImpl(CityRepository cityRepository, PlaceRepository placeRepository) {
         this.cityRepository = cityRepository;
         this.placeRepository = placeRepository;
     }

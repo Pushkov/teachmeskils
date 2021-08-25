@@ -1,12 +1,36 @@
 package nicomed.tms.telegramspring.command;
 
-import org.telegram.telegrambots.meta.api.objects.commands.BotCommand;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import nicomed.tms.telegramspring.service.ICommandsService;
 
-public class HelpCommand extends BotCommand {
+import java.util.stream.Collectors;
 
+@Getter
+@Setter
+@EqualsAndHashCode(callSuper = false)
+public class HelpCommand extends BaseBotCommand {
 
-    public HelpCommand() {
-        super("help", "список всех доступных команд\n");
+    private final ICommandsService service;
+
+    public HelpCommand(ICommandsService service) {
+        super("help", "информация о доступных командах\n");
+        this.service = service;
     }
+
+    @Override
+    public String getMessageText() {
+        return "Список доступных команд\n"
+                + service.info().stream()
+                .map(s -> "/" + s)
+                .collect(Collectors.joining("\n"));
+    }
+
+    @Override
+    public String getMessageText(String text) {
+        return getMessageText();
+    }
+
 
 }
