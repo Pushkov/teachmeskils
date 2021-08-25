@@ -1,9 +1,9 @@
-package nicomed.tms.telegramspring.model;
+package nicomed.tms.telegramspring.data.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import nicomed.tms.telegramspring.enums.Grade;
+import nicomed.tms.telegramspring.data.enums.Grade;
 
 import javax.persistence.*;
 

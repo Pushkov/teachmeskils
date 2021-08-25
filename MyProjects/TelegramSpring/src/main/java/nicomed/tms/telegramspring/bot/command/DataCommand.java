@@ -1,13 +1,13 @@
-package nicomed.tms.telegramspring.command;
+package nicomed.tms.telegramspring.bot.command;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
-import nicomed.tms.telegramspring.enums.Grade;
-import nicomed.tms.telegramspring.model.City;
-import nicomed.tms.telegramspring.model.Place;
-import nicomed.tms.telegramspring.service.IDataService;
+import nicomed.tms.telegramspring.data.enums.Grade;
+import nicomed.tms.telegramspring.data.model.City;
+import nicomed.tms.telegramspring.data.model.Place;
+import nicomed.tms.telegramspring.data.service.IDataService;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;

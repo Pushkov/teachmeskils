@@ -1,10 +1,10 @@
 package nicomed.tms.telegramspring.bot;
 
 import lombok.extern.slf4j.Slf4j;
-import nicomed.tms.telegramspring.command.*;
-import nicomed.tms.telegramspring.service.CommandsServiceImpl;
-import nicomed.tms.telegramspring.service.ICommandsService;
-import nicomed.tms.telegramspring.service.IDataService;
+import nicomed.tms.telegramspring.bot.command.*;
+import nicomed.tms.telegramspring.bot.service.CommandsServiceImpl;
+import nicomed.tms.telegramspring.bot.service.ICommandsService;
+import nicomed.tms.telegramspring.data.service.IDataService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;

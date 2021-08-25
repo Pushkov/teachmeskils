@@ -1,10 +1,10 @@
-package nicomed.tms.telegramspring.service;
+package nicomed.tms.telegramspring.bot.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 
-import static nicomed.tms.telegramspring.util.Constants.COMMAND_DELIMETR;
-import static nicomed.tms.telegramspring.util.Constants.COMMAND_PREFIX;
+import static nicomed.tms.telegramspring.bot.util.Constants.COMMAND_DELIMETR;
+import static nicomed.tms.telegramspring.bot.util.Constants.COMMAND_PREFIX;
 
 @Slf4j
 public class CommandParser {

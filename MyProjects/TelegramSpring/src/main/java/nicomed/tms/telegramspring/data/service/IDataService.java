@@ -1,8 +1,8 @@
-package nicomed.tms.telegramspring.service;
+package nicomed.tms.telegramspring.data.service;
 
-import nicomed.tms.telegramspring.enums.Grade;
-import nicomed.tms.telegramspring.model.City;
-import nicomed.tms.telegramspring.model.Place;
+import nicomed.tms.telegramspring.data.enums.Grade;
+import nicomed.tms.telegramspring.data.model.City;
+import nicomed.tms.telegramspring.data.model.Place;
 
 import java.util.List;
 

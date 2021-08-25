@@ -1,7 +1,7 @@
-package nicomed.tms.telegramspring.service;
+package nicomed.tms.telegramspring.bot.service;
 
 import lombok.extern.slf4j.Slf4j;
-import nicomed.tms.telegramspring.command.BaseBotCommand;
+import nicomed.tms.telegramspring.bot.command.BaseBotCommand;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.objects.commands.BotCommand;
 
@@ -9,7 +9,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static nicomed.tms.telegramspring.util.Constants.COMMAND_PREFIX;
+import static nicomed.tms.telegramspring.bot.util.Constants.COMMAND_PREFIX;
 
 @Slf4j
 @Component

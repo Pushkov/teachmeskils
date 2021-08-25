@@ -1,4 +1,4 @@
-package nicomed.tms.telegramspring.command;
+package nicomed.tms.telegramspring.bot.command;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

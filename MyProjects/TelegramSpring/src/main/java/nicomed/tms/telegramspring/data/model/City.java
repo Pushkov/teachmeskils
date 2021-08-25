@@ -1,4 +1,4 @@
-package nicomed.tms.telegramspring.model;
+package nicomed.tms.telegramspring.data.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

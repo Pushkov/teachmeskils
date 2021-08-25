@@ -1,6 +1,6 @@
-package nicomed.tms.telegramspring.service;
+package nicomed.tms.telegramspring.bot.service;
 
-import nicomed.tms.telegramspring.command.BaseBotCommand;
+import nicomed.tms.telegramspring.bot.command.BaseBotCommand;
 
 import java.util.Set;
 

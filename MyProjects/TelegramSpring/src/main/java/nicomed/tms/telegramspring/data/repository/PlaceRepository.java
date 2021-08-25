@@ -1,7 +1,7 @@
-package nicomed.tms.telegramspring.repository;
+package nicomed.tms.telegramspring.data.repository;
 
-import nicomed.tms.telegramspring.model.City;
-import nicomed.tms.telegramspring.model.Place;
+import nicomed.tms.telegramspring.data.model.City;
+import nicomed.tms.telegramspring.data.model.Place;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

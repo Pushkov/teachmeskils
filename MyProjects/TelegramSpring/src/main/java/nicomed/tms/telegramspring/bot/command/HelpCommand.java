@@ -1,9 +1,9 @@
-package nicomed.tms.telegramspring.command;
+package nicomed.tms.telegramspring.bot.command;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-import nicomed.tms.telegramspring.service.ICommandsService;
+import nicomed.tms.telegramspring.bot.service.ICommandsService;
 
 import java.util.stream.Collectors;
 
